@@ -14,18 +14,21 @@ function showToast(message) {
 }
 
 // -------------------------------------------------------------
-// BASE DE DATOS DE UNIDADES Y EMBARQUES (FLOTA 3.5T FORD F-350)
-// CON COORDENADAS GPS REALES Y RUTAS CARRETERAS EN MÉXICO
+// BASE DE DATOS DE UNIDADES Y EMBARQUES (FLOTA MÉXICO)
+// -------------------------------------------------------------
+// -------------------------------------------------------------
+// BASE DE DATOS DE UNIDADES Y EMBARQUES (FLOTA FORD F-350 MÉXICO)
 // -------------------------------------------------------------
 const vehiclesData = {
   'MX-752069247': {
     id: 'MX-752069247',
-    model: 'Ford F-350 Super Duty 2024',
-    type: 'truck',
+    model: 'Ford F-350 Super Duty 2024 · 3.5T Caja Seca',
+    brand: 'Ford F-350',
+    type: 'f350_box',
     route: 'CDMX → Monterrey',
     origin: 'CDMX (Vallejo)',
     destination: 'Monterrey (Apodaca)',
-    corridor: 'México 57 (Troncal Nacional)',
+    corridor: 'Autopista 57D (Troncal Nacional México-Querétaro-NL)',
     status: 'On route',
     statusText: 'En ruta',
     statusClass: 'onroute',
@@ -36,69 +39,80 @@ const vehiclesData = {
     remainingKm: '28 km restantes',
     speed: '84 km/h',
     fuel: 78,
-    odometer: '42,850 km',
-    plates: '72-AB-9F (SCT Carga 3.5T)',
-    vin: '1FT8W3BT5PEB82910',
-    engine: '6.7L Power Stroke V8 Turbo Diésel 330 HP · TorqShift 10 vel.',
-    tempBrakes: '98 °C (Normal)',
-    tirePressure: '80 PSI (Calibración Óptima)',
+    odometer: '142,850 km',
+    plates: '72-AB-9F (SCT Federal Carga)',
+    vin: '1FT8W3BT9REC82910',
+    engine: 'Ford 7.3L V8 Godzilla 350 HP · TorqShift 10 vel.',
+    tempBrakes: '138 °C (Normal)',
+    tirePressure: '80 PSI (Doble Rodado Trasero Óptimo)',
     coords: {
-      origin: { lat: 19.4978, lng: -99.1678, name: 'CDMX (Vallejo)' },
-      current: { lat: 20.3712, lng: -99.9921, name: 'Autopista 57D · Palmillas, QRO', highway: 'Autopista 57D (México - Querétaro)', km: 'KM 148', text: '20.3712° N, -99.9921° W' },
-      destination: { lat: 25.7785, lng: -100.1870, name: 'Monterrey (Apodaca)' },
+      origin: [19.4890, -99.1620],
+      destination: [25.7785, -100.1870],
+      current: [20.3712, -99.9921],
+      highway: 'Autopista 57D México-Querétaro · KM 148',
       casetas: [
-        { lat: 19.7042, lng: -99.2312, name: 'Caseta Tepotzotlán' },
-        { lat: 20.3712, lng: -99.9921, name: 'Caseta Palmillas' },
-        { lat: 21.9821, lng: -100.8912, name: 'Caseta San Luis' }
+        { name: 'Caseta Tepotzotlán (IAVE)', lat: 19.7150, lng: -99.2210, cost: '$102 MXN' },
+        { name: 'Caseta Palmillas (IAVE)', lat: 20.3210, lng: -99.9410, cost: '$102 MXN' },
+        { name: 'Caseta Chichimequillas', lat: 20.7620, lng: -100.3210, cost: '$120 MXN' }
       ],
       routePoints: [
-        [19.4978, -99.1678], [19.6012, -99.1840], [19.7042, -99.2312], [19.9821, -99.5210],
-        [20.3712, -99.9921], [20.5880, -100.3890], [21.1619, -100.9312], [22.1565, -100.9855],
-        [23.6492, -100.6441], [25.4232, -101.0053], [25.6866, -100.3161], [25.7785, -100.1870]
+        [19.4890, -99.1620],
+        [19.6800, -99.2000],
+        [19.7150, -99.2210],
+        [19.9800, -99.5300],
+        [20.3210, -99.9410],
+        [20.3712, -99.9921],
+        [20.5900, -100.3900],
+        [21.1500, -100.7500],
+        [22.1500, -100.9800],
+        [23.6300, -100.6400],
+        [25.4300, -100.9700],
+        [25.7785, -100.1870]
       ]
     },
     driver: {
       name: 'Juan Carlos Méndez',
       phone: '+52 55 4192 8831',
-      license: 'Lic. Federal Tipo B (Carga 3.5T)',
+      license: 'Lic. Federal Tipo B (Servicio de Carga General)',
       licenseExp: '14/Nov/2027',
-      medicalExp: 'Vigente (Apto)',
+      medicalExp: 'Vigente (Apto SCT)',
       rating: '4.9 ★',
       trips: 412
     },
     cargo: {
-      type: 'Abarrotes y Paquetería Regional',
-      weight: '3.4 Toneladas',
-      pallets: '6 Tarimas',
+      type: 'Abarrotes, Insumos y Paquetería Consolidada',
+      weight: '2.85 Toneladas',
+      pallets: '6 Tarimas E-Track',
       sealNumber: 'SAT-MX-883921',
-      tempReefer: 'Caja Seca 14ft con Copete',
+      tempReefer: 'Caja Seca 3.5T con Copete Aerodinámico',
       client: 'Grupo Femsa / Oxxo Logística',
-      declaredValue: '$680,000.00 MXN'
+      declaredValue: '$480,000.00 MXN'
     },
     billing: {
-      subtotal: '$18,500.00',
-      iva: '$2,960.00',
-      retention: '-$740.00',
-      total: '$20,720.00 MXN',
+      subtotal: '$24,500.00',
+      iva: '$3,920.00',
+      retention: '-$980.00',
+      total: '$27,440.00 MXN',
       status: 'Timbrado SAT / Crédito 30 días',
       uuid: '8B4F2A19-92C1-4D3E-A591-D18293C89B1A',
       invoiceDate: '08 Sep 2024'
     },
     documents: [
       { name: 'Carta Porte Digital CFDI 4.0', type: 'PDF / XML', folio: 'CP-2024-88492', status: 'Timbrado SAT' },
-      { name: 'Póliza de Seguro de Carga GNP', type: 'PDF Oficial', folio: 'POL-GNP-772910', status: 'Vigente' },
+      { name: 'Póliza de Seguro Quálitas Carga', type: 'PDF Oficial', folio: 'POL-QUA-772910', status: 'Vigente' },
       { name: 'Dictamen Físico-Mecánica NOM-068', type: 'SCT Aprobado', folio: 'SCT-FM-2024-09', status: 'Vigente' },
       { name: 'Verificación Ambiental de Humos', type: 'Holograma 00', folio: 'VERIF-2024-B', status: 'Vigente' }
     ]
   },
   'MX-93633762': {
     id: 'MX-93633762',
-    model: 'Ford F-350 Chasis Cabina 2023',
-    type: 'truck',
+    model: 'Ford F-350 Chasis Cabina 2023 · Caja Seca Copete',
+    brand: 'Ford F-350',
+    type: 'f350_box',
     route: 'Manzanillo → Guadalajara',
     origin: 'Manzanillo (Puerto Contecon)',
     destination: 'Guadalajara (El Salto)',
-    corridor: 'Corredor Pacífico Puerto',
+    corridor: 'Autopista 54D Corredor Pacífico Puerto-Occidente',
     status: 'Watching',
     statusText: 'Monitoreo',
     statusClass: 'watch',
@@ -109,66 +123,75 @@ const vehiclesData = {
     remainingKm: '115 km restantes',
     speed: '78 km/h',
     fuel: 85,
-    odometer: '58,420 km',
-    plates: '91-BA-3K (SCT 3.5T)',
-    vin: '1FT8W3B68PEC48190',
-    engine: '6.2L V8 Gasolina 385 HP · TorqShift 6 vel.',
-    tempBrakes: '105 °C (Normal)',
-    tirePressure: '80 PSI (Óptimo)',
+    odometer: '98,420 km',
+    plates: '91-BA-3K (SCT Carga)',
+    vin: '1FT8W3BT7PEC48190',
+    engine: 'Ford 6.7L Power Stroke V8 Turbo Diésel 330 HP',
+    tempBrakes: '145 °C (Normal)',
+    tirePressure: '80 PSI (Doble Rodado Trasero)',
     coords: {
-      origin: { lat: 19.0544, lng: -104.3160, name: 'Manzanillo (Contecon)' },
-      current: { lat: 19.4215, lng: -103.5820, name: 'Autopista Colima-Guadalajara · San Marcos', highway: 'Autopista 54D (Colima - Guadalajara)', km: 'KM 94', text: '19.4215° N, -103.5820° W' },
-      destination: { lat: 20.5180, lng: -103.2960, name: 'Guadalajara (El Salto)' },
+      origin: [19.0540, -104.3160],
+      destination: [20.5210, -103.3180],
+      current: [19.4120, -103.6210],
+      highway: 'Autopista 54D Colima-Guadalajara · KM 82',
       casetas: [
-        { lat: 19.1820, lng: -103.9510, name: 'Caseta Cuyutlán' },
-        { lat: 19.4215, lng: -103.5820, name: 'Caseta San Marcos' }
+        { name: 'Caseta Cuyutlán', lat: 18.9500, lng: -104.1100, cost: '$165 MXN' },
+        { name: 'Caseta San Marcos (IAVE)', lat: 19.4200, lng: -103.5800, cost: '$180 MXN' },
+        { name: 'Caseta Acatlán de Juárez', lat: 20.4100, lng: -103.5900, cost: '$110 MXN' }
       ],
       routePoints: [
-        [19.0544, -104.3160], [18.9140, -103.8750], [19.1820, -103.9510], [19.2433, -103.7240],
-        [19.4215, -103.5820], [19.7820, -103.5410], [20.2540, -103.4890], [20.5180, -103.2960]
+        [19.0540, -104.3160],
+        [19.1200, -104.1800],
+        [19.2400, -103.7300],
+        [19.4120, -103.6210],
+        [19.6800, -103.5100],
+        [19.9800, -103.5500],
+        [20.3500, -103.5800],
+        [20.5210, -103.3180]
       ]
     },
     driver: {
       name: 'Gabriel Soto Villalobos',
       phone: '+52 33 1892 4490',
-      license: 'Lic. Federal Tipo B (Carga General)',
+      license: 'Lic. Federal Tipo B',
       licenseExp: '20/Ene/2026',
       medicalExp: 'Vigente',
       rating: '4.8 ★',
       trips: 340
     },
     cargo: {
-      type: 'Electrónicos y Envíos Express de Puerto',
-      weight: '2.9 Toneladas',
-      pallets: '5 Tarimas',
+      type: 'Electrónicos de Consumo y Componentes de Importación',
+      weight: '3.10 Toneladas',
+      pallets: '8 Tarimas de Alta Densidad',
       sealNumber: 'CONTECON-MZ-4921',
-      tempReefer: 'Caja Seca 14ft con Copete',
+      tempReefer: 'Seco / Sello Fiscal Aduanal',
       client: 'Samsung Electronics México',
-      declaredValue: '$1,200,000.00 MXN'
+      declaredValue: '$1,450,000.00 MXN'
     },
     billing: {
-      subtotal: '$14,000.00',
-      iva: '$2,240.00',
-      retention: '-$560.00',
-      total: '$15,680.00 MXN',
-      status: 'Timbrado SAT / Pago Contra Entrega',
+      subtotal: '$18,000.00',
+      iva: '$2,880.00',
+      retention: '-$720.00',
+      total: '$20,160.00 MXN',
+      status: 'Timbrado SAT / Contra Entrega',
       uuid: '4A12B980-6C23-45F1-9988-E102934812AB',
       invoiceDate: '08 Sep 2024'
     },
     documents: [
       { name: 'Carta Porte Complemento 3.0', type: 'PDF / XML', folio: 'CP-2024-91024', status: 'Timbrado SAT' },
       { name: 'Pedimento Aduanal de Importación', type: 'SAT Aduanas', folio: 'PED-24-16-3921-0012', status: 'Desaduanado' },
-      { name: 'Póliza Quálitas Transporte', type: 'Seguro Cobertura Amplia', folio: 'QUA-88192-01', status: 'Vigente' }
+      { name: 'Póliza GNP Transporte', type: 'Seguro Cobertura Amplia', folio: 'GNP-88192-01', status: 'Vigente' }
     ]
   },
   'MX-113949207': {
     id: 'MX-113949207',
-    model: 'Mercedes Sprinter 3.5T 2023',
-    type: 'van',
+    model: 'Ford F-350 Super Duty 2024 · Caja Reparto 3.5T',
+    brand: 'Ford F-350',
+    type: 'f350_box',
     route: 'CDMX → Toluca',
     origin: 'CDMX (Azcapotzalco)',
     destination: 'Toluca (Parque Toluca 2000)',
-    corridor: 'Metropolitano Valle de Toluca',
+    corridor: 'Autopista 15D Metropolitano Valle de Toluca',
     status: 'Moving',
     statusText: 'En tránsito',
     statusClass: 'moving',
@@ -177,49 +200,54 @@ const vehiclesData = {
     departureTime: '02:55 CST',
     remainingTime: '00:28:40',
     remainingKm: '19 km restantes',
-    speed: '65 km/h',
+    speed: '68 km/h',
     fuel: 62,
     odometer: '45,120 km',
-    plates: 'LC-92-811 (Edomex Carga)',
-    vin: 'W1Y4EBHY9PT284910',
-    engine: '2.0L Turbo Diésel 170 HP · 9G-TRONIC',
+    plates: 'LC-92-811 (Edomex Carga Federal)',
+    vin: '1FT8W3BT6REC28491',
+    engine: 'Ford 7.3L V8 Godzilla 350 HP · 10 vel.',
     tempBrakes: '95 °C (Frío)',
-    tirePressure: '48 PSI (Calibrado)',
+    tirePressure: '80 PSI',
     coords: {
-      origin: { lat: 19.4850, lng: -99.1830, name: 'CDMX (Azcapotzalco)' },
-      current: { lat: 19.3320, lng: -99.3450, name: 'Autopista México-Toluca · La Marquesa', highway: 'Autopista 15D (México - Toluca)', km: 'KM 36', text: '19.3320° N, -99.3450° W' },
-      destination: { lat: 19.3410, lng: -99.5750, name: 'Toluca (Parque 2000)' },
+      origin: [19.4920, -99.1820],
+      destination: [19.3410, -99.5620],
+      current: [19.3520, -99.3010],
+      highway: 'Autopista 15D México-Toluca (La Marquesa) · KM 24',
       casetas: [
-        { lat: 19.3620, lng: -99.2780, name: 'Caseta La Venta' }
+        { name: 'Caseta La Venta (IAVE)', lat: 19.3480, lng: -99.2890, cost: '$105 MXN' }
       ],
       routePoints: [
-        [19.4850, -99.1830], [19.4210, -99.2150], [19.3620, -99.2780], [19.3320, -99.3450],
-        [19.3010, -99.4620], [19.2890, -99.5420], [19.3410, -99.5750]
+        [19.4920, -99.1820],
+        [19.4200, -99.2400],
+        [19.3520, -99.3010],
+        [19.2900, -99.3700],
+        [19.2850, -99.4600],
+        [19.3410, -99.5620]
       ]
     },
     driver: {
       name: 'Héctor Daniel Rivas',
       phone: '+52 55 7712 9011',
-      license: 'Lic. Tipo C (Servicio Particular Carga)',
+      license: 'Lic. Tipo C / Federal B',
       licenseExp: '05/May/2026',
       medicalExp: 'Vigente',
       rating: '5.0 ★',
       trips: 620
     },
     cargo: {
-      type: 'Paquetería Express y E-Commerce',
-      weight: '1.4 Toneladas',
-      pallets: '8 Bultos Consolidados',
-      sealNumber: 'PAVA-EXP-112',
-      tempReefer: 'Paquetería Última Milla',
+      type: 'Paquetería Express y E-Commerce Especializado',
+      weight: '1.45 Toneladas',
+      pallets: '4 Tarimas con Fleje',
+      sealNumber: 'PAVA-F350-112',
+      tempReefer: 'Caja Seca Copete Reparto',
       client: 'Mercado Libre México',
       declaredValue: '$340,000.00 MXN'
     },
     billing: {
-      subtotal: '$8,400.00',
-      iva: '$1,344.00',
-      retention: '-$336.00',
-      total: '$9,408.00 MXN',
+      subtotal: '$6,800.00',
+      iva: '$1,088.00',
+      retention: '-$272.00',
+      total: '$7,616.00 MXN',
       status: 'Pagado Electrónico SPEI',
       uuid: 'F81920AA-1290-4882-BCA1-998811223344',
       invoiceDate: '08 Sep 2024'
@@ -231,12 +259,13 @@ const vehiclesData = {
   },
   'MX-118945307': {
     id: 'MX-118945307',
-    model: 'Ford F-350 Super Duty 2024',
-    type: 'truck',
+    model: 'Ford F-350 Chasis Cabina 2024 · Caja Seca Bajío',
+    brand: 'Ford F-350',
+    type: 'f350_box',
     route: 'Querétaro → León',
     origin: 'Querétaro (El Marqués)',
     destination: 'León (Puerto Interior Silao)',
-    corridor: 'Corredor Industrial del Bajío',
+    corridor: 'Autopista 45D Corredor Industrial del Bajío',
     status: 'On route',
     statusText: 'En ruta',
     statusClass: 'onroute',
@@ -248,22 +277,28 @@ const vehiclesData = {
     speed: '88 km/h',
     fuel: 70,
     odometer: '38,900 km',
-    plates: 'SS-44-192 (Querétaro 3.5T)',
-    vin: '1FT8W3BT8REC18293',
-    engine: '6.7L Power Stroke V8 330 HP · TorqShift 10 vel.',
-    tempBrakes: '92 °C (Normal)',
-    tirePressure: '80 PSI (Calibrado)',
+    plates: 'SS-44-192 (Querétaro Carga)',
+    vin: '1FT8W3BT5REC18293',
+    engine: 'Ford 6.7L Power Stroke V8 Turbo Diésel',
+    tempBrakes: '110 °C (Normal)',
+    tirePressure: '80 PSI',
     coords: {
-      origin: { lat: 20.5880, lng: -100.2850, name: 'Querétaro (El Marqués)' },
-      current: { lat: 20.7850, lng: -101.1980, name: 'Carretera 45D · Irapuato-Salamanca', highway: 'Carretera Federal 45D (Bajío)', km: 'KM 78', text: '20.7850° N, -101.1980° W' },
-      destination: { lat: 20.9850, lng: -101.5200, name: 'Silao (Puerto Interior)' },
+      origin: [20.5920, -100.3890],
+      destination: [20.9850, -101.5540],
+      current: [20.7120, -100.8210],
+      highway: 'Autopista 45D Querétaro-Irapuato · KM 45',
       casetas: [
-        { lat: 20.6120, lng: -100.4850, name: 'Caseta Querétaro-Celaya' },
-        { lat: 20.6950, lng: -101.3120, name: 'Caseta Salamanca' }
+        { name: 'Caseta Querétaro (IAVE)', lat: 20.6120, lng: -100.4800, cost: '$89 MXN' },
+        { name: 'Caseta Salamanca', lat: 20.5820, lng: -101.1900, cost: '$95 MXN' }
       ],
       routePoints: [
-        [20.5880, -100.2850], [20.5340, -100.8120], [20.5750, -101.1980], [20.7850, -101.1980],
-        [20.9120, -101.4250], [20.9850, -101.5200]
+        [20.5920, -100.3890],
+        [20.6120, -100.4800],
+        [20.5400, -100.8100],
+        [20.7120, -100.8210],
+        [20.5820, -101.1900],
+        [20.7200, -101.3500],
+        [20.9850, -101.5540]
       ]
     },
     driver: {
@@ -276,11 +311,11 @@ const vehiclesData = {
       trips: 289
     },
     cargo: {
-      type: 'Autopartes y Arneses Eléctricos',
-      weight: '3.1 Toneladas',
-      pallets: '5 Racks Metálicos',
+      type: 'Autopartes y Arneses Eléctricos Automotrices',
+      weight: '2.20 Toneladas',
+      pallets: '6 Racks Metálicos',
       sealNumber: 'SEAL-BAJIO-991',
-      tempReefer: 'Caja Seca 14ft con Copete',
+      tempReefer: 'Seco / Just-In-Time',
       client: 'General Motors Complejo Silao',
       declaredValue: '$950,000.00 MXN'
     },
@@ -300,12 +335,13 @@ const vehiclesData = {
   },
   'MX-752263347': {
     id: 'MX-752263347',
-    model: 'Ford F-450 Super Duty 2024',
-    type: 'truck',
+    model: 'Ford F-350 Super Duty 2024 · 3.5T Doble Rodado',
+    brand: 'Ford F-350',
+    type: 'f350_box',
     route: 'Monterrey → Nuevo Laredo',
     origin: 'Monterrey (Salinas Victoria)',
     destination: 'Nuevo Laredo (Puente III)',
-    corridor: 'Corredor Internacional NAFTA / Comercio Mundial',
+    corridor: 'Autopista 85D Corredor Internacional NAFTA',
     status: 'On route',
     statusText: 'En ruta',
     statusClass: 'onroute',
@@ -316,47 +352,52 @@ const vehiclesData = {
     remainingKm: '84 km restantes',
     speed: '82 km/h',
     fuel: 91,
-    odometer: '32,400 km',
-    plates: '88-BC-4P (SCT C-TPAT 4.5T)',
-    vin: '1FDOW4HT5REC29104',
-    engine: '6.7L V8 High Output 330 HP · Dually 4x2',
-    tempBrakes: '95 °C (Normal)',
-    tirePressure: '85 PSI (Calibración Óptima)',
+    odometer: '67,400 km',
+    plates: '88-BC-4P (SCT C-TPAT Carga)',
+    vin: '1FT8W3BT2REC29104',
+    engine: 'Ford 6.7L Power Stroke V8 Turbo Diésel 330 HP',
+    tempBrakes: '130 °C (Normal)',
+    tirePressure: '82 PSI (Calibración Óptima)',
     coords: {
-      origin: { lat: 25.9620, lng: -100.2930, name: 'Monterrey (Salinas Victoria)' },
-      current: { lat: 26.8520, lng: -99.9850, name: 'Autopista Monterrey-Laredo · Sabinas Hidalgo', highway: 'Autopista Federal 85D (NAFTA)', km: 'KM 160', text: '26.8520° N, -99.9850° W' },
-      destination: { lat: 27.4860, lng: -99.5070, name: 'Nuevo Laredo (Puente III)' },
+      origin: [25.8610, -100.2920],
+      destination: [27.4860, -99.5080],
+      current: [26.5410, -99.9820],
+      highway: 'Autopista 85D Monterrey-Nuevo Laredo · KM 102',
       casetas: [
-        { lat: 26.5020, lng: -100.1850, name: 'Caseta Sabinas Hidalgo' }
+        { name: 'Caseta Sabinas Hidalgo (IAVE)', lat: 26.4950, lng: -100.1200, cost: '$310 MXN' }
       ],
       routePoints: [
-        [25.9620, -100.2930], [26.3510, -100.1820], [26.8520, -99.9850], [27.2140, -99.7210],
-        [27.4860, -99.5070]
+        [25.8610, -100.2920],
+        [26.1500, -100.2000],
+        [26.4950, -100.1200],
+        [26.5410, -99.9820],
+        [27.0200, -99.7800],
+        [27.4860, -99.5080]
       ]
     },
     driver: {
       name: 'Raúl Mendoza Saldaña',
       phone: '+52 81 1920 4488',
-      license: 'Lic. Federal Tipo B con Certificación FAST',
+      license: 'Lic. Federal Tipo B con Certificación B1 Fast',
       licenseExp: '11/Oct/2026',
       medicalExp: 'Vigente',
       rating: '4.95 ★',
       trips: 580
     },
     cargo: {
-      type: 'Insumos Industriales y Paquetería de Exportación',
-      weight: '4.2 Toneladas',
-      pallets: '6 Tarimas Reforzadas',
+      type: 'Perfiles de Acero y Piezas Maquiladas de Exportación',
+      weight: '3.30 Toneladas',
+      pallets: '6 Tarimas Reforzadas con Eslingas',
       sealNumber: 'CTPAT-SAT-99014',
-      tempReefer: 'Caja Seca 14ft Reforzada',
+      tempReefer: 'Caja Seca Cerrada con Sellos C-TPAT',
       client: 'Ternium México / DeAcero',
-      declaredValue: '$850,000.00 MXN'
+      declaredValue: '$1,250,000.00 MXN'
     },
     billing: {
-      subtotal: '$18,000.00',
-      iva: '$2,880.00',
-      retention: '-$720.00',
-      total: '$20,160.00 MXN',
+      subtotal: '$16,000.00',
+      iva: '$2,560.00',
+      retention: '-$640.00',
+      total: '$17,920.00 MXN',
       status: 'Timbrado SAT / Despacho Aduanal',
       uuid: '55667788-99AA-BBCC-DDEE-FF0011223344',
       invoiceDate: '08 Sep 2024'
@@ -369,12 +410,13 @@ const vehiclesData = {
   },
   'MX-916472621': {
     id: 'MX-916472621',
-    model: 'RAM 4000 Heavy Duty 2023',
-    type: 'truck',
+    model: 'Ford F-350 Chasis Cabina 2023 · Caja Seca 3.5T',
+    brand: 'Ford F-350',
+    type: 'f350_box',
     route: 'Veracruz → Puebla',
     origin: 'Veracruz (Puerto San Juan de Ulúa)',
     destination: 'Puebla (Parque Finsa)',
-    corridor: 'Corredor Golfo - Altiplano Central',
+    corridor: 'Autopista 150D Corredor Golfo - Altiplano Central',
     status: 'Delayed',
     statusText: 'Retrasado',
     statusClass: 'delayed',
@@ -385,24 +427,30 @@ const vehiclesData = {
     remainingKm: '140 km restantes',
     speed: '25 km/h (Tráfico Cumbres Maltrata)',
     fuel: 54,
-    odometer: '65,400 km',
-    plates: '55-AA-1Z (SCT 4T)',
-    vin: '3C7WR4EL5PG882190',
-    engine: '6.4L HEMI V8 410 HP · Heavy Duty 8 vel.',
-    tempBrakes: '110 °C (Pendiente pronunciada)',
+    odometer: '185,400 km',
+    plates: '55-AA-1Z (SCT Federal)',
+    vin: '1FT8W3BT4PEC88219',
+    engine: 'Ford 7.3L V8 Godzilla 350 HP',
+    tempBrakes: '160 °C (Pendiente pronunciada)',
     tirePressure: '80 PSI',
     coords: {
-      origin: { lat: 19.1738, lng: -96.1342, name: 'Veracruz (Puerto)' },
-      current: { lat: 18.8410, lng: -97.2340, name: 'Cumbres de Maltrata · Autopista 150D', highway: 'Autopista 150D (Veracruz - Puebla)', km: 'KM 244', text: '18.8410° N, -97.2340° W' },
-      destination: { lat: 19.0980, lng: -98.2450, name: 'Puebla (Parque Finsa)' },
+      origin: [19.2010, -96.1410],
+      destination: [19.1230, -98.2410],
+      current: [18.8210, -97.2340],
+      highway: 'Autopista 150D Córdoba-Puebla (Cumbres de Maltrata) · KM 246',
       casetas: [
-        { lat: 19.0120, lng: -96.3450, name: 'Caseta Paso del Toro' },
-        { lat: 18.8820, lng: -97.0120, name: 'Caseta Fortín' },
-        { lat: 18.9410, lng: -97.6850, name: 'Caseta Esperanza' }
+        { name: 'Caseta Paso del Toro', lat: 19.0400, lng: -96.1400, cost: '$118 MXN' },
+        { name: 'Caseta Cuitláhuac', lat: 18.8200, lng: -96.7200, cost: '$126 MXN' },
+        { name: 'Caseta Esperanza (IAVE)', lat: 18.8600, lng: -97.3500, cost: '$154 MXN' }
       ],
       routePoints: [
-        [19.1738, -96.1342], [18.8540, -96.9120], [18.8410, -97.2340], [18.9410, -97.6850],
-        [19.0120, -97.9450], [19.0980, -98.2450]
+        [19.2010, -96.1410],
+        [19.0400, -96.1400],
+        [18.8800, -96.9200],
+        [18.8210, -97.2340],
+        [18.8600, -97.3500],
+        [19.0100, -97.9800],
+        [19.1230, -98.2410]
       ]
     },
     driver: {
@@ -415,13 +463,13 @@ const vehiclesData = {
       trips: 290
     },
     cargo: {
-      type: 'Materia Prima Química No Peligrosa',
-      weight: '3.5 Toneladas',
-      pallets: '4 Contenedores IBC',
+      type: 'Materia Prima Química Grado Alimenticio',
+      weight: '1.95 Toneladas',
+      pallets: '4 Contenedores IBC Asegurados',
       sealNumber: 'VER-PORT-7712',
-      tempReefer: 'Caja Seca 14ft con Copete',
-      client: 'Braskem Idesa / BASF',
-      declaredValue: '$520,000.00 MXN'
+      tempReefer: 'Seco Grado Industrial',
+      client: 'Braskem Idesa / BASF México',
+      declaredValue: '$620,000.00 MXN'
     },
     billing: {
       subtotal: '$15,500.00',
@@ -439,12 +487,13 @@ const vehiclesData = {
   },
   'MX-118134203': {
     id: 'MX-118134203',
-    model: 'Ford F-350 Super Duty 2024',
-    type: 'truck',
+    model: 'Ford F-350 Super Duty 2024 · Caja Refrigerada Copete',
+    brand: 'Ford F-350',
+    type: 'f350_box',
     route: 'Tijuana → Mexicali',
     origin: 'Tijuana (Otay)',
     destination: 'Mexicali (Parque Nelson)',
-    corridor: 'Corredor Fronterizo Rumorosa',
+    corridor: 'Autopista 2D Corredor Fronterizo La Rumorosa',
     status: 'On route',
     statusText: 'En ruta',
     statusClass: 'onroute',
@@ -455,23 +504,29 @@ const vehiclesData = {
     remainingKm: '46 km restantes',
     speed: '75 km/h',
     fuel: 82,
-    odometer: '28,200 km',
-    plates: '12-BC-8K (SCT 3.5T)',
-    vin: '1FT8W3BT2REC29182',
-    engine: '6.7L Power Stroke V8 Diésel · Dually 4x2',
-    tempBrakes: '90 °C (Freno motor auxiliar)',
+    odometer: '51,200 km',
+    plates: '12-BC-8K (SCT Carga)',
+    vin: '1FT8W3BT0REC29182',
+    engine: 'Ford 6.7L Power Stroke Turbo Diésel 330 HP',
+    tempBrakes: '120 °C (Freno de motor activo)',
     tirePressure: '80 PSI',
     coords: {
-      origin: { lat: 32.5340, lng: -116.9280, name: 'Tijuana (Otay)' },
-      current: { lat: 32.5650, lng: -116.0820, name: 'La Rumorosa · Caseta El Hongo', highway: 'Autopista Federal 2D (La Rumorosa)', km: 'KM 92', text: '32.5650° N, -116.0820° W' },
-      destination: { lat: 32.6270, lng: -115.4540, name: 'Mexicali (Parque Nelson)' },
+      origin: [32.5320, -116.9210],
+      destination: [32.6270, -115.4520],
+      current: [32.5480, -116.0820],
+      highway: 'Autopista 2D Tijuana-Mexicali (La Rumorosa) · KM 68',
       casetas: [
-        { lat: 32.5420, lng: -116.6120, name: 'Caseta Tecate' },
-        { lat: 32.5650, lng: -116.0820, name: 'Caseta El Hongo' }
+        { name: 'Caseta El Hongo (IAVE)', lat: 32.5200, lng: -116.4800, cost: '$90 MXN' },
+        { name: 'Caseta La Rumorosa', lat: 32.5300, lng: -115.9800, cost: '$31 MXN' }
       ],
       routePoints: [
-        [32.5340, -116.9280], [32.5740, -116.6250], [32.5650, -116.0820], [32.5920, -115.7890],
-        [32.6270, -115.4540]
+        [32.5320, -116.9210],
+        [32.5600, -116.6300],
+        [32.5200, -116.4800],
+        [32.5480, -116.0820],
+        [32.5300, -115.9800],
+        [32.6000, -115.7000],
+        [32.6270, -115.4520]
       ]
     },
     driver: {
@@ -484,19 +539,19 @@ const vehiclesData = {
       trips: 410
     },
     cargo: {
-      type: 'Dispositivos Médicos y Quirúrgicos',
-      weight: '2.8 Toneladas',
-      pallets: '4 Tarimas Termocontroladas',
+      type: 'Dispositivos Médicos e Insumos Quirúrgicos',
+      weight: '2.40 Toneladas',
+      pallets: '6 Tarimas Termocontroladas',
       sealNumber: 'MED-TJ-8841',
-      tempReefer: 'Caja Térmica 14ft con Copete',
+      tempReefer: '20 °C Controlado',
       client: 'Medtronic México',
-      declaredValue: '$1,800,000.00 MXN'
+      declaredValue: '$2,800,000.00 MXN'
     },
     billing: {
-      subtotal: '$13,800.00',
-      iva: '$2,208.00',
-      retention: '-$552.00',
-      total: '$15,456.00 MXN',
+      subtotal: '$12,800.00',
+      iva: '$2,048.00',
+      retention: '-$512.00',
+      total: '$14,336.00 MXN',
       status: 'Timbrado SAT / En Ruta',
       uuid: 'A1B2C3D4-E5F6-7890-1234-56789ABCDEF0',
       invoiceDate: '08 Sep 2024'
@@ -508,12 +563,13 @@ const vehiclesData = {
   },
   'MX-928322207': {
     id: 'MX-928322207',
-    model: 'Chevrolet Silverado 3500 HD 2024',
-    type: 'truck',
+    model: 'Ford F-350 Chasis Cabina 2024 · Caja Térmica 3.5T',
+    brand: 'Ford F-350',
+    type: 'f350_box',
     route: 'Mérida → Cancún',
     origin: 'Mérida (Umán)',
     destination: 'Cancún (Zona Hotelera / Aeropuerto)',
-    corridor: 'Corredor Península de Yucatán',
+    corridor: 'Autopista 180D Corredor Península de Yucatán',
     status: 'Watching',
     statusText: 'Monitoreo',
     statusClass: 'watch',
@@ -525,39 +581,45 @@ const vehiclesData = {
     speed: '90 km/h',
     fuel: 75,
     odometer: '29,400 km',
-    plates: 'YZ-88-129 (Yucatán Carga 3.5T)',
-    vin: '1GB4C3CY8RF192019',
-    engine: '6.6L Duramax V8 Turbo Diésel 350 HP',
-    tempBrakes: '88 °C',
+    plates: 'YZ-88-129 (Yucatán Carga)',
+    vin: '1FT8W3BT8REC19201',
+    engine: 'Ford 7.3L V8 Godzilla Gasolina 350 HP',
+    tempBrakes: '90 °C',
     tirePressure: '80 PSI',
     coords: {
-      origin: { lat: 20.8820, lng: -89.7450, name: 'Mérida (Umán)' },
-      current: { lat: 20.9150, lng: -87.8240, name: 'Autopista 180D · Valladolid, Yuc', highway: 'Autopista 180D (Mérida - Cancún)', km: 'KM 172', text: '20.9150° N, -87.8240° W' },
-      destination: { lat: 21.0360, lng: -86.8770, name: 'Cancún (Aeropuerto)' },
+      origin: [20.9320, -89.6510],
+      destination: [21.1610, -86.8510],
+      current: [20.8120, -88.5410],
+      highway: 'Autopista 180D Mérida-Cancún (Chichén Itzá) · KM 120',
       casetas: [
-        { lat: 20.8920, lng: -88.9120, name: 'Caseta Pisté' },
-        { lat: 20.9450, lng: -87.3120, name: 'Caseta Tintal' }
+        { name: 'Caseta Pisté (Chichén)', lat: 20.6900, lng: -88.5800, cost: '$210 MXN' },
+        { name: 'Caseta Tintal (IAVE)', lat: 21.0100, lng: -87.1900, cost: '$285 MXN' }
       ],
       routePoints: [
-        [20.8820, -89.7450], [20.9320, -89.0150], [20.9150, -87.8240], [20.9850, -87.2140],
-        [21.0360, -86.8770]
+        [20.9320, -89.6510],
+        [20.8800, -89.2000],
+        [20.6900, -88.5800],
+        [20.8120, -88.5410],
+        [20.8200, -87.8000],
+        [21.0100, -87.1900],
+        [21.1610, -86.8510]
       ]
     },
     driver: {
       name: 'Eduardo Pech Canché',
       phone: '+52 999 482 1190',
-      license: 'Lic. Estatal de Chofer',
+      license: 'Lic. Estatal / Federal de Chofer',
       licenseExp: '30/Jun/2026',
       medicalExp: 'Vigente',
       rating: '4.9 ★',
       trips: 512
     },
     cargo: {
-      type: 'Alimentos Gourmet y Congelados Hotelería',
-      weight: '2.5 Toneladas',
+      type: 'Alimentos Gourmet y Congelados para Hotelería',
+      weight: '2.10 Toneladas',
       pallets: '4 Pallets Refrigerados',
       sealNumber: 'CANCUN-HOTEL-49',
-      tempReefer: 'Caja Refrigerada 14ft con Copete',
+      tempReefer: '-18 °C Congelado',
       client: 'Grupo Posadas / Hoteles Xcaret',
       declaredValue: '$420,000.00 MXN'
     },
@@ -580,681 +642,575 @@ const vehiclesData = {
 let currentVehicleId = 'MX-752069247';
 let currentActiveTab = 'shipping';
 
-// // -------------------------------------------------------------
-// GENERADORES VECTORIALES SVG DE ALTA PRECISIÓN (FORD F-350 3.5T)
+// -------------------------------------------------------------
+// GENERADORES VECTORIALES SVG: FORD F-350 3.5T (CHASIS CABINA + CAJA SECA CON COPETE)
 // -------------------------------------------------------------
 
-function generateTruckSvg(id, brand, capacity) {
-  let accentColor = '#2563eb';
-  if (brand.includes('RAM')) accentColor = '#dc2626';
-  if (brand.includes('Chevrolet') || brand.includes('Silverado')) accentColor = '#f59e0b';
-  if (brand.includes('Isuzu')) accentColor = '#10b981';
-  if (brand.includes('Mercedes')) accentColor = '#0284c7';
-
+function generateTruckSvg(id, brand = 'Ford F-350', capacity = 59) {
   const cleanId = id.replace(/[^a-zA-Z0-9]/g, '_');
+  
+  // Custom subtle variations based on status/id
+  let stripeColor = '#38bdf8';
+  if (id.includes('9363')) stripeColor = '#f59e0b';
+  if (id.includes('9164')) stripeColor = '#ef4444';
+  if (id.includes('1181')) stripeColor = '#8b5cf6';
+  if (id.includes('9283')) stripeColor = '#10b981';
 
   return `
-  <svg class="vehicle-svg truck-svg f350-svg" viewBox="0 0 250 74" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="${brand} camioneta chasis cabina 3.5T con caja seca y copete">
+  <svg class="vehicle-svg truck-svg f350-svg" viewBox="0 0 320 74" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="${brand} Chasis Cabina 3.5T">
     <defs>
-      <!-- CAB GRADIENT (White / Silver Automotive finish) -->
-      <linearGradient id="f350CabGrad_${cleanId}" x1="0%" y1="0%" x2="0%" y2="100%">
-        <stop offset="0%" stop-color="#ffffff"/>
-        <stop offset="25%" stop-color="#eef2f6"/>
-        <stop offset="65%" stop-color="#cbd5e1"/>
-        <stop offset="100%" stop-color="#64748b"/>
+      <!-- Cabina Ford Super Duty Gradient -->
+      <linearGradient id="f350CabGrad_${cleanId}" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#e2e8f0"/>
+        <stop offset="35%" stop-color="#94a3b8"/>
+        <stop offset="85%" stop-color="#475569"/>
+        <stop offset="100%" stop-color="#1e293b"/>
       </linearGradient>
-      <!-- BOX BODY GRADIENT (White Box Panels) -->
+      <!-- Caja Seca Blanca con Copete -->
       <linearGradient id="f350BoxGrad_${cleanId}" x1="0%" y1="0%" x2="0%" y2="100%">
-        <stop offset="0%" stop-color="#ffffff"/>
-        <stop offset="20%" stop-color="#f8fafc"/>
-        <stop offset="70%" stop-color="#e2e8f0"/>
+        <stop offset="0%" stop-color="#f8fafc"/>
+        <stop offset="20%" stop-color="#e2e8f0"/>
+        <stop offset="75%" stop-color="#cbd5e1"/>
         <stop offset="100%" stop-color="#94a3b8"/>
       </linearGradient>
-      <!-- ALUMINUM TRIM GRADIENT -->
-      <linearGradient id="f350AlumGrad_${cleanId}" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stop-color="#94a3b8"/>
-        <stop offset="30%" stop-color="#f1f5f9"/>
-        <stop offset="70%" stop-color="#cbd5e1"/>
-        <stop offset="100%" stop-color="#64748b"/>
-      </linearGradient>
-      <!-- WINDOW TINT -->
+      <!-- Cristales Polarizados de Cabina -->
       <linearGradient id="f350GlassGrad_${cleanId}" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stop-color="#1e293b"/>
-        <stop offset="100%" stop-color="#090d14"/>
+        <stop offset="60%" stop-color="#0f172a"/>
+        <stop offset="100%" stop-color="#020617"/>
       </linearGradient>
-      <!-- 8/10-LUG RIM GRADIENT -->
+      <!-- Rines de Acero 8 Birlos / Doble Rodado Trasero -->
       <linearGradient id="f350RimGrad_${cleanId}" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#ffffff"/>
-        <stop offset="40%" stop-color="#cbd5e1"/>
-        <stop offset="80%" stop-color="#64748b"/>
+        <stop offset="0%" stop-color="#cbd5e1"/>
+        <stop offset="50%" stop-color="#64748b"/>
         <stop offset="100%" stop-color="#1e293b"/>
+      </linearGradient>
+      <!-- Parrilla Cromada Ford Super Duty -->
+      <linearGradient id="f350GrilleGrad_${cleanId}" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#f1f5f9"/>
+        <stop offset="50%" stop-color="#94a3b8"/>
+        <stop offset="100%" stop-color="#334155"/>
       </linearGradient>
     </defs>
 
-    <!-- GROUND SHADOW & ROAD REFLECTION -->
-    <ellipse cx="122" cy="67" rx="108" ry="3.5" fill="#000000" opacity="0.45"/>
-    <line x1="12" y1="66.5" x2="238" y2="66.5" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+    <!-- Sombra en Asfalto (Proporción compacta 3.5T) -->
+    <ellipse cx="158" cy="67" rx="114" ry="3.2" fill="#000000" opacity="0.55"/>
+    <line x1="38" y1="66.5" x2="278" y2="66.5" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
 
-    <!-- REAR CHASSIS RAIL & FUEL TANK -->
-    <rect x="100" y="50" width="124" height="4.5" rx="1" fill="#171a20" stroke="#2a303c" stroke-width="0.5"/>
-    <rect x="110" y="52.5" width="28" height="4" rx="0.5" fill="#0d1117" stroke="#1f2937" stroke-width="0.5"/>
-    <circle cx="114" cy="54.5" r="1.5" fill="#374151"/>
-
-    <!-- ================= FORD F-350 CABIN ================= -->
-    <g class="f350-cabin">
-      <!-- Lower rocker panel -->
-      <rect x="62" y="48.5" width="46" height="3" rx="0.8" fill="#1e232c" stroke="#333b47" stroke-width="0.4"/>
+    <!-- ============================================== -->
+    <!-- 1. CAJA SECA 3.5T COMPACTA CON COPETE          -->
+    <!-- ============================================== -->
+    <g class="f350-caja-seca">
+      <!-- Cuerpo de la caja con copete sobre cabina (X: 98 a 262) -->
+      <path d="M 98 17 L 126 7 L 260 7 Q 263 7 263 11 L 263 53 L 128 53 L 128 22 L 98 22 Z" fill="url(#f350BoxGrad_${cleanId})" stroke="#475569" stroke-width="0.8"/>
       
-      <!-- Ford F-350 Main Cab Silhouette (Tucked neatly under the copete) -->
-      <path d="M 22 56 L 22 46 Q 22 41 25 36 L 30 34 Q 34 33 46 33 L 58 32 Q 62 31 66 27 L 78 18 Q 82 17 88 17 L 108 17 L 108 49 Q 104 40 93 40 Q 82 40 78 49 L 58 49 Q 54 40 43 40 Q 32 40 28 49 L 22 49 Z" fill="url(#f350CabGrad_${cleanId})" stroke="#4f596a" stroke-width="0.7"/>
+      <!-- Borde aerodinámico frontal del copete -->
+      <path d="M 98 17 Q 96 19 98 22 L 128 22 L 126 7 Q 108 12 98 17 Z" fill="#cbd5e1" stroke="#64748b" stroke-width="0.6"/>
+      
+      <!-- Molduras y remaches estructurales de aluminio -->
+      <line x1="128" y1="8" x2="261" y2="8" stroke="#ffffff" stroke-opacity="0.6" stroke-width="1"/>
+      <line x1="128" y1="52" x2="261" y2="52" stroke="#334155" stroke-width="1.2"/>
+      
+      <!-- Paneles verticales de la caja seca 3.5T -->
+      <line x1="162" y1="8" x2="162" y2="52" stroke="#94a3b8" stroke-opacity="0.3" stroke-width="0.7"/>
+      <line x1="196" y1="8" x2="196" y2="52" stroke="#94a3b8" stroke-opacity="0.3" stroke-width="0.7"/>
+      <line x1="230" y1="8" x2="230" y2="52" stroke="#94a3b8" stroke-opacity="0.3" stroke-width="0.7"/>
+      
+      <!-- Franja reflectiva / corporativa lateral -->
+      <path d="M 130 31 L 261 31 L 261 34 L 130 34 Z" fill="${stripeColor}" opacity="0.85"/>
+      <circle cx="136" cy="32.5" r="1.2" fill="#ffffff"/>
 
-      <!-- Front Bumper (Heavy Duty Black Matte Super Duty Bumper) -->
-      <path d="M 18 56 L 18 46 Q 18 44 22 44 L 32 44 L 32 56 Z" fill="#11141a" stroke="#2b3340" stroke-width="0.6"/>
-      <rect x="20" y="49" width="6" height="3.5" rx="0.8" fill="#090b0e"/>
-      <rect x="21" y="46" width="3" height="1.2" rx="0.4" fill="#e2e8f0"/>
-
-      <!-- Ford Super Duty Black Front Grille & Blue Oval Emblem -->
-      <path d="M 22 35 L 28 35 L 28 44 L 22 44 Z" fill="#11151c" stroke="#252d3a" stroke-width="0.6"/>
-      <line x1="22" y1="38" x2="28" y2="38" stroke="#374151" stroke-width="0.9"/>
-      <line x1="22" y1="41" x2="28" y2="41" stroke="#374151" stroke-width="0.9"/>
-      <ellipse cx="24" cy="39.5" rx="1.6" ry="1" fill="#2563eb"/>
-
-      <!-- Stacked Headlights with Amber Turn Signal -->
-      <path d="M 27 34 L 32 34 L 32 44 L 27 44 Z" fill="#0f172a" stroke="#334155" stroke-width="0.5"/>
-      <path d="M 28 35 L 31 35 L 31 39 L 28 39 Z" fill="#93c5fd"/>
-      <path d="M 28 40 L 31 40 L 31 43 L 28 43 Z" fill="#e2e8f0"/>
-      <rect x="30.5" y="35" width="1.2" height="8" fill="#f59e0b"/>
-
-      <!-- Black Front Fender Flare (Moldura ancha de salpicadera negra como en la foto) -->
-      <path d="M 28 49 Q 32 38 43 38 Q 54 38 58 49 L 55 49 Q 52 40 43 40 Q 34 40 31 49 Z" fill="#171b22" stroke="#2a3240" stroke-width="0.5"/>
-
-      <!-- Hood lines & Super Duty Fender Badge -->
-      <line x1="30" y1="34" x2="62" y2="31" stroke="#3f4857" stroke-width="0.6"/>
-      <rect x="62" y="32" width="6" height="2.2" rx="0.4" fill="#11151c"/>
-      <rect x="63" y="32.8" width="4" height="0.6" fill="#f59e0b"/>
-
-      <!-- Windshield & Side Window (Ford Super Duty drop-down window sill!) -->
-      <path d="M 66 27 L 78 18 L 105 18 L 105 32 L 72 32 Q 68 32 66 27 Z" fill="url(#f350GlassGrad_${cleanId})" stroke="#2a3342" stroke-width="0.6"/>
-      <line x1="77" y1="19" x2="74" y2="32" stroke="#181d26" stroke-width="1.2"/>
-      <path d="M 80 19 L 85 19 L 77 30 L 72 30 Z" fill="#ffffff" opacity="0.14"/>
-      <path d="M 94 19 L 98 19 L 94 30 L 90 30 Z" fill="#ffffff" opacity="0.08"/>
-
-      <!-- Door cut line and handle -->
-      <line x1="71" y1="32" x2="71" y2="49" stroke="#374151" stroke-width="0.6"/>
-      <line x1="105" y1="18" x2="105" y2="49" stroke="#374151" stroke-width="0.6"/>
-      <rect x="98" y="35" width="4.5" height="1.4" rx="0.7" fill="#111827"/>
-
-      <!-- Ford Super Duty Dual-Arm Towing Mirror -->
-      <path d="M 69 30 L 64 32 L 64 39 L 69 38 Z" fill="#111827" stroke="#2d3748" stroke-width="0.5"/>
-      <line x1="69" y1="31" x2="71" y2="31" stroke="#111827" stroke-width="1"/>
-      <line x1="69" y1="37" x2="71" y2="37" stroke="#111827" stroke-width="1"/>
-      <line x1="65" y1="35" x2="68" y2="35" stroke="#475569" stroke-width="0.5"/>
-      <rect x="64.2" y="33" width="0.8" height="3" fill="#f59e0b"/>
-    </g>
-
-    <!-- ================= 3.5T BOX BODY WITH OVER-CAB COPETE (CAJA SECA CON COPETE RECTO) ================= -->
-    <g class="f350-box-body">
-      <!-- Main Box Outer Path (Square copete extending over cab roof as in real photo) -->
-      <path d="M 68 10 L 74 6 L 226 6 L 226 50 L 108 50 L 108 22 L 72 22 Q 68 22 68 18 Z" fill="url(#f350BoxGrad_${cleanId})" stroke="#475569" stroke-width="0.75"/>
-
-      <!-- Aluminum Corner / Perimeter Moldings (Perfiles de Aluminio en todos los bordes) -->
-      <!-- Top Aluminum Rail -->
-      <path d="M 68 10 L 74 6 L 226 6 L 226 8.5 L 73 8.5 L 68 12 Z" fill="url(#f350AlumGrad_${cleanId})" stroke="#475569" stroke-width="0.4"/>
-      <!-- Front Overhang Vertical Edge Trim -->
-      <rect x="68" y="9" width="3.5" height="11" fill="url(#f350AlumGrad_${cleanId})" stroke="#475569" stroke-width="0.4"/>
-      <!-- Overhang Bottom Edge Trim -->
-      <rect x="68" y="19.5" width="40" height="2.5" fill="url(#f350AlumGrad_${cleanId})" stroke="#475569" stroke-width="0.4"/>
-      <!-- Mid-Body Drop Vertical Edge Trim -->
-      <rect x="106" y="20" width="3.5" height="30" fill="url(#f350AlumGrad_${cleanId})" stroke="#475569" stroke-width="0.4"/>
-      <!-- Bottom Aluminum Side Skirt Rail -->
-      <rect x="108" y="48.5" width="118" height="2.2" fill="url(#f350AlumGrad_${cleanId})" stroke="#475569" stroke-width="0.4"/>
-      <!-- Rear Aluminum Corner Rail -->
-      <rect x="222.5" y="6" width="3.5" height="44" fill="url(#f350AlumGrad_${cleanId})" stroke="#475569" stroke-width="0.4"/>
-
-      <!-- Copete Center Vertical Aluminum Stripe (Franja central de aluminio como en la foto) -->
-      <rect x="84" y="6.5" width="4" height="14" fill="url(#f350AlumGrad_${cleanId})" stroke="#64748b" stroke-width="0.4"/>
-
-      <!-- Vertical Panel Seams & Rivets (Remaches en paneles de aluminio) -->
-      <line x1="135" y1="9" x2="135" y2="48" stroke="#94a3b8" stroke-width="0.6" stroke-dasharray="2 2"/>
-      <line x1="164" y1="9" x2="164" y2="48" stroke="#94a3b8" stroke-width="0.6" stroke-dasharray="2 2"/>
-      <line x1="193" y1="9" x2="193" y2="48" stroke="#94a3b8" stroke-width="0.6" stroke-dasharray="2 2"/>
-
-      <!-- Fleet Accent Stripe -->
-      <rect x="110" y="28" width="112" height="3" rx="0.5" fill="${accentColor}" opacity="0.9"/>
-      <circle cx="116" cy="29.5" r="1" fill="#ffffff"/>
-
-      <!-- SCT / DOT Safety Reflective Tape (Cinta Reflejante Roja y Blanca) -->
-      <g class="reflective-tape" transform="translate(110, 46.5)">
-        <rect x="0" y="0" width="112" height="1.8" fill="#ef4444"/>
-        <rect x="0" y="0" width="10" height="1.8" fill="#ffffff"/>
-        <rect x="20" y="0" width="10" height="1.8" fill="#ffffff"/>
-        <rect x="40" y="0" width="10" height="1.8" fill="#ffffff"/>
-        <rect x="60" y="0" width="10" height="1.8" fill="#ffffff"/>
-        <rect x="80" y="0" width="10" height="1.8" fill="#ffffff"/>
-        <rect x="100" y="0" width="10" height="1.8" fill="#ffffff"/>
+      <!-- Cinta Reflejante Reglamentaria SCT / DOT-C2 (Rojo y Blanco) -->
+      <g class="reflective-tape" transform="translate(130, 48)">
+        <rect x="0" y="0" width="130" height="2" fill="#ef4444"/>
+        <rect x="8" y="0" width="10" height="2" fill="#ffffff"/>
+        <rect x="28" y="0" width="10" height="2" fill="#ffffff"/>
+        <rect x="48" y="0" width="10" height="2" fill="#ffffff"/>
+        <rect x="68" y="0" width="10" height="2" fill="#ffffff"/>
+        <rect x="88" y="0" width="10" height="2" fill="#ffffff"/>
+        <rect x="108" y="0" width="10" height="2" fill="#ffffff"/>
       </g>
 
-      <!-- Top Clearance Marker Lights (Luces de gálibo como en la foto) -->
-      <circle cx="78" cy="8" r="1.1" fill="#f59e0b"/>
-      <circle cx="94" cy="8" r="1.1" fill="#f59e0b"/>
-      <circle cx="224" cy="8" r="1.1" fill="#ef4444"/>
-      <circle cx="110" cy="46" r="1" fill="#f59e0b"/>
-      <circle cx="224" cy="46" r="1" fill="#ef4444"/>
+      <!-- Luces de gálibo / Luces LED superiores ámbar y rojas -->
+      <circle cx="102" cy="19" r="1.1" fill="#f59e0b"/>
+      <circle cx="130" cy="9.5" r="1.1" fill="#f59e0b"/>
+      <circle cx="196" cy="9.5" r="1.1" fill="#f59e0b"/>
+      <circle cx="261" cy="9.5" r="1.1" fill="#ef4444"/>
+      <circle cx="261" cy="50" r="1.1" fill="#ef4444"/>
 
-      <!-- Rear Door Hardware & Lock Rods -->
-      <line x1="223" y1="9" x2="223" y2="48" stroke="#334155" stroke-width="0.8"/>
-      <rect x="224" y="14" width="1.2" height="2.5" fill="#1e293b"/>
-      <rect x="224" y="28" width="1.2" height="2.5" fill="#1e293b"/>
-      <rect x="224" y="42" width="1.2" height="2.5" fill="#1e293b"/>
-      <rect x="221.5" y="26" width="2" height="5" rx="0.5" fill="#0f172a"/>
-
-      <!-- Rear Bumper & Mud Flap (Lodera trasera) -->
-      <rect x="216" y="52" width="12" height="3.5" rx="0.5" fill="#1e232c" stroke="#374151" stroke-width="0.5"/>
-      <rect x="225" y="43" width="2" height="6" fill="#ef4444"/>
-      <path d="M 194 50 Q 200 50 200 57 L 197 61 L 194 61 Z" fill="#11151c"/>
+      <!-- Marco trasero y cerrojo de puerta tipo cortina -->
+      <rect x="260" y="10" width="3" height="42" fill="#475569"/>
+      <rect x="262" y="16" width="1.5" height="3" fill="#cbd5e1"/>
+      <rect x="262" y="40" width="1.5" height="3" fill="#cbd5e1"/>
+      
+      <!-- Faldón inferior de seguridad y loderas traseras -->
+      <rect x="175" y="53" width="28" height="4.5" rx="0.5" fill="#1e293b" stroke="#334155" stroke-width="0.5"/>
+      <line x1="177" y1="55" x2="201" y2="55" stroke="#475569" stroke-width="0.6" stroke-dasharray="3 2"/>
+      <rect x="254" y="53" width="7" height="9" fill="#0f172a"/>
     </g>
 
-    <!-- ================= WHEELS (8-LUG SUPER DUTY & DUALLIES) ================= -->
-    <!-- FRONT WHEEL (x=43, y=57) -->
-    <g class="wheel" transform="translate(43, 57)">
-      <circle cx="0" cy="0" r="9" fill="#090c10" stroke="#1f2530" stroke-width="1"/>
-      <circle cx="0" cy="0" r="6" fill="url(#f350RimGrad_${cleanId})" stroke="#171b22" stroke-width="0.5"/>
-      <circle cx="0" cy="0" r="2.8" fill="#151922"/>
-      <circle cx="0" cy="0" r="1.2" fill="#94a3b8"/>
-      <circle cx="0" cy="-4" r="0.6" fill="#0d1117"/>
-      <circle cx="2.8" cy="-2.8" r="0.6" fill="#0d1117"/>
-      <circle cx="4" cy="0" r="0.6" fill="#0d1117"/>
-      <circle cx="2.8" cy="2.8" r="0.6" fill="#0d1117"/>
-      <circle cx="0" cy="4" r="0.6" fill="#0d1117"/>
-      <circle cx="-2.8" cy="2.8" r="0.6" fill="#0d1117"/>
-      <circle cx="-4" cy="0" r="0.6" fill="#0d1117"/>
-      <circle cx="-2.8" cy="-2.8" r="0.6" fill="#0d1117"/>
+    <!-- ============================================== -->
+    <!-- 2. CHASIS CABINA FORD SUPER DUTY F-350        -->
+    <!-- ============================================== -->
+    <g class="f350-cabina">
+      <!-- Larguero del chasis reforzado de acero -->
+      <rect x="68" y="52" width="60" height="4" fill="#0f172a" stroke="#334155" stroke-width="0.5"/>
+      <!-- Tanque de combustible y estribo lateral -->
+      <rect x="84" y="53" width="40" height="4" rx="1" fill="#1e293b" stroke="#475569" stroke-width="0.5"/>
+
+      <!-- Silueta frontal y cabina Ford F-350 Super Duty -->
+      <path d="M 48 53 L 48 42 Q 48 39 51 38 L 68 37 Q 74 37 77 34 L 89 23 Q 93 20 102 20 L 126 20 L 126 53 L 118 53 Q 116 44 104 44 Q 92 44 90 53 L 70 53 Q 68 44 56 44 L 48 53 Z" fill="url(#f350CabGrad_${cleanId})" stroke="#475569" stroke-width="0.8"/>
+
+      <!-- Cofre con relieves de poder (Power Dome) -->
+      <path d="M 51 38 L 77 34 L 76 36 L 50 40 Z" fill="#64748b" opacity="0.6"/>
+
+      <!-- Parrilla Frontal Cromada Ford Super Duty con 2 barras horizontales -->
+      <rect x="48" y="40" width="4" height="13" rx="0.5" fill="url(#f350GrilleGrad_${cleanId})" stroke="#1e293b" stroke-width="0.5"/>
+      <line x1="48" y1="44" x2="52" y2="44" stroke="#0f172a" stroke-width="0.8"/>
+      <line x1="48" y1="48" x2="52" y2="48" stroke="#0f172a" stroke-width="0.8"/>
+      <!-- Emblema Oval Azul Ford -->
+      <ellipse cx="49.5" cy="46" rx="1.2" ry="0.8" fill="#1d4ed8" stroke="#ffffff" stroke-width="0.3"/>
+
+      <!-- Faros Delanteros C-Clamp LED Signature de Ford Super Duty -->
+      <path d="M 50 40 L 55 39 L 54 44 L 51 44 Z" fill="#e0f2fe" stroke="#38bdf8" stroke-width="0.5"/>
+      <circle cx="52.5" cy="42" r="1.1" fill="#ffffff"/>
+      <!-- Direccional ámbar inferior en faro -->
+      <rect x="51" y="45" width="2.5" height="1.5" fill="#f59e0b"/>
+
+      <!-- Defensa Delantera Cromada Heavy-Duty con ganchos de arrastre -->
+      <path d="M 47 49 L 54 49 L 53 54 L 47 54 Z" fill="#94a3b8" stroke="#334155" stroke-width="0.5"/>
+      <rect x="46" y="52" width="2" height="2" fill="#0f172a"/>
+
+      <!-- Ventana Lateral de Cabina Ford con corte bajo distintivo -->
+      <path d="M 80 33 L 90 23 Q 94 21 102 21 L 122 21 L 122 35 L 80 35 Z" fill="url(#f350GlassGrad_${cleanId})" stroke="#334155" stroke-width="0.7"/>
+      <!-- Reflejos en Cristal -->
+      <path d="M 94 23 L 100 23 L 86 34 L 81 34 Z" fill="#ffffff" opacity="0.16"/>
+      <path d="M 112 23 L 118 23 L 110 34 L 104 34 Z" fill="#ffffff" opacity="0.09"/>
+      <line x1="102" y1="21" x2="102" y2="35" stroke="#1e293b" stroke-width="0.8"/>
+
+      <!-- Manija de Puerta Negra -->
+      <rect x="110" y="38" width="5" height="1.5" rx="0.6" fill="#0f172a"/>
+
+      <!-- Espejo Lateral de Remolque Doble Brazo (Tow Mirrors con Direccional) -->
+      <path d="M 82 32 L 76 32 L 76 38 L 82 37 Z" fill="#0f172a" stroke="#334155" stroke-width="0.5"/>
+      <line x1="76" y1="35" x2="79" y2="35" stroke="#f59e0b" stroke-width="0.8"/>
+
+      <!-- Luces Ámbar de Toldillo Cabina (Cab Marker Lights) -->
+      <circle cx="100" cy="19.5" r="0.7" fill="#f59e0b"/>
+      <circle cx="106" cy="19.5" r="0.7" fill="#f59e0b"/>
+      <circle cx="112" cy="19.5" r="0.7" fill="#f59e0b"/>
     </g>
 
-    <!-- REAR DUALLY WHEELS (x=182, y=57) - Double Wheel Silhouette -->
-    <g class="wheel dually" transform="translate(182, 57)">
-      <ellipse cx="4" cy="0" rx="9" ry="9" fill="#090c10" stroke="#1a202c" stroke-width="0.8"/>
-      <circle cx="0" cy="0" r="9" fill="#090c10" stroke="#242c3b" stroke-width="1"/>
-      <circle cx="0" cy="0" r="5.8" fill="url(#f350RimGrad_${cleanId})" stroke="#141820" stroke-width="0.5"/>
-      <circle cx="0" cy="0" r="3.4" fill="#0f141d" stroke="#334155" stroke-width="0.4"/>
-      <circle cx="0" cy="0" r="1.6" fill="#64748b"/>
-      <circle cx="0" cy="-4" r="0.6" fill="#0d1117"/>
-      <circle cx="2.8" cy="-2.8" r="0.6" fill="#0d1117"/>
-      <circle cx="4" cy="0" r="0.6" fill="#0d1117"/>
-      <circle cx="2.8" cy="2.8" r="0.6" fill="#0d1117"/>
-      <circle cx="0" cy="4" r="0.6" fill="#0d1117"/>
-      <circle cx="-2.8" cy="2.8" r="0.6" fill="#0d1117"/>
-      <circle cx="-4" cy="0" r="0.6" fill="#0d1117"/>
-      <circle cx="-2.8" cy="-2.8" r="0.6" fill="#0d1117"/>
+    <!-- ============================================== -->
+    <!-- 3. RUEDAS Y RINES (EJE DELANTERO + EJE TRASERO) -->
+    <!-- ============================================== -->
+    <!-- Rueda Delantera (Eje Direccional Heavy Duty F-350) -->
+    <g class="wheel front-wheel" transform="translate(68, 54)">
+      <circle cx="0" cy="0" r="9.5" fill="#090d12" stroke="#1e293b" stroke-width="1"/>
+      <circle cx="0" cy="0" r="6.5" fill="url(#f350RimGrad_${cleanId})" stroke="#0f172a" stroke-width="0.6"/>
+      <circle cx="0" cy="0" r="3" fill="#0f172a"/>
+      <circle cx="0" cy="0" r="1.3" fill="#e2e8f0"/>
+      <circle cx="0" cy="-2" r="0.4" fill="#0f172a"/>
+      <circle cx="1.5" cy="-1.5" r="0.4" fill="#0f172a"/>
+      <circle cx="2" cy="0" r="0.4" fill="#0f172a"/>
+      <circle cx="1.5" cy="1.5" r="0.4" fill="#0f172a"/>
+      <circle cx="0" cy="2" r="0.4" fill="#0f172a"/>
+      <circle cx="-1.5" cy="1.5" r="0.4" fill="#0f172a"/>
+      <circle cx="-2" cy="0" r="0.4" fill="#0f172a"/>
+      <circle cx="-1.5" cy="-1.5" r="0.4" fill="#0f172a"/>
+    </g>
+
+    <!-- Rueda Trasera (Eje Trasero Doble Rodado Dually 3.5T) -->
+    <g class="wheel rear-wheel-1" transform="translate(220, 54)">
+      <circle cx="0" cy="0" r="9.5" fill="#090d12" stroke="#1e293b" stroke-width="1"/>
+      <circle cx="0" cy="0" r="6.5" fill="url(#f350RimGrad_${cleanId})" stroke="#0f172a" stroke-width="0.6"/>
+      <circle cx="0" cy="0" r="3.2" fill="#0f172a"/>
+      <circle cx="0" cy="0" r="1.3" fill="#e2e8f0"/>
+      <circle cx="0" cy="-2" r="0.4" fill="#0f172a"/>
+      <circle cx="1.5" cy="-1.5" r="0.4" fill="#0f172a"/>
+      <circle cx="2" cy="0" r="0.4" fill="#0f172a"/>
+      <circle cx="1.5" cy="1.5" r="0.4" fill="#0f172a"/>
+      <circle cx="0" cy="2" r="0.4" fill="#0f172a"/>
+      <circle cx="-1.5" cy="1.5" r="0.4" fill="#0f172a"/>
+      <circle cx="-2" cy="0" r="0.4" fill="#0f172a"/>
+      <circle cx="-1.5" cy="-1.5" r="0.4" fill="#0f172a"/>
     </g>
   </svg>`;
 }
 
 function generateVanSvg(id, brand, capacity) {
-  let accentColor = '#0284c7';
-  const cleanId = id.replace(/[^a-zA-Z0-9]/g, '_');
-
-  return `
-  <svg class="vehicle-svg van-svg" viewBox="0 0 250 74" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="${brand} camioneta de reparto 3.5T">
-    <defs>
-      <linearGradient id="vanGrad_${cleanId}" x1="0%" y1="0%" x2="0%" y2="100%">
-        <stop offset="0%" stop-color="#ffffff"/>
-        <stop offset="20%" stop-color="#e2e8f0"/>
-        <stop offset="70%" stop-color="#94a3b8"/>
-        <stop offset="100%" stop-color="#475569"/>
-      </linearGradient>
-      <linearGradient id="vanGlassGrad_${cleanId}" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#1e293b"/>
-        <stop offset="100%" stop-color="#090d14"/>
-      </linearGradient>
-      <linearGradient id="vanRimGrad_${cleanId}" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#cbd5e1"/>
-        <stop offset="50%" stop-color="#64748b"/>
-        <stop offset="100%" stop-color="#1e293b"/>
-      </linearGradient>
-    </defs>
-    <ellipse cx="125" cy="67" rx="108" ry="3" fill="#000000" opacity="0.45"/>
-    <line x1="18" y1="66.5" x2="232" y2="66.5" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-    <g class="van-chassis">
-      <path d="M 28 58 L 28 48 Q 28 44 32 42 L 44 39 Q 51 37 56 33 L 76 18 Q 83 13 94 13 L 218 13 Q 227 13 229 18 L 229 57 L 215 57 Q 211 48 198 48 Q 185 48 181 57 L 88 57 Q 84 48 71 48 Q 58 48 54 57 L 28 58 Z" fill="url(#vanGrad_${cleanId})" stroke="#64748b" stroke-width="0.75"/>
-      <path d="M 28 47 L 36 47 L 38 58 L 28 58 Z" fill="#1f242d" stroke="#313947" stroke-width="0.5"/>
-      <line x1="30" y1="51" x2="36" y2="51" stroke="#434c5b" stroke-width="0.8"/>
-      <path d="M 34 42 L 44 41 L 42 46 L 32 46 Z" fill="#75a6ff" stroke="#9bc0ff" stroke-width="0.4"/>
-      <circle cx="37" cy="43.5" r="1" fill="#ffffff"/>
-      <path d="M 60 32 L 78 18 L 104 18 L 104 33 L 58 33 Z" fill="url(#vanGlassGrad_${cleanId})" stroke="#364050" stroke-width="0.6"/>
-      <line x1="71" y1="24" x2="67" y2="33" stroke="#222833" stroke-width="1.2"/>
-      <path d="M 76 20 L 81 20 L 69 31 L 64 31 Z" fill="#ffffff" opacity="0.12"/>
-      <path d="M 92 20 L 97 20 L 92 31 L 87 31 Z" fill="#ffffff" opacity="0.08"/>
-      <path d="M 57 31 L 52 32 L 52 37 L 58 36 Z" fill="#15181e" stroke="#353d4a" stroke-width="0.5"/>
-      <path d="M 106 18 L 106 55 L 54 55" fill="none" stroke="#20252e" stroke-width="0.7"/>
-      <rect x="97" y="37" width="4.5" height="1.2" rx="0.6" fill="#15181e"/>
-      <path d="M 111 15 L 111 55 L 170 55 L 170 15" fill="none" stroke="#242a33" stroke-width="0.65"/>
-      <line x1="111" y1="40" x2="223" y2="40" stroke="#20252e" stroke-width="0.9"/>
-      <rect x="160" y="37" width="4.5" height="1.2" rx="0.6" fill="#15181e"/>
-      <line x1="110" y1="31" x2="218" y2="31" stroke="${accentColor}" stroke-width="1.6" stroke-linecap="round" opacity="0.85"/>
-    </g>
-    <g class="wheel" transform="translate(71, 58)">
-      <circle cx="0" cy="0" r="8.5" fill="#101317" stroke="#242932" stroke-width="0.9"/>
-      <circle cx="0" cy="0" r="5.6" fill="url(#vanRimGrad_${cleanId})" stroke="#151820" stroke-width="0.5"/>
-      <circle cx="0" cy="0" r="2.6" fill="#181d25"/>
-      <circle cx="0" cy="0" r="1.1" fill="#959ca8"/>
-    </g>
-    <g class="wheel" transform="translate(198, 58)">
-      <circle cx="0" cy="0" r="8.5" fill="#101317" stroke="#242932" stroke-width="0.9"/>
-      <circle cx="0" cy="0" r="5.6" fill="url(#vanRimGrad_${cleanId})" stroke="#151820" stroke-width="0.5"/>
-      <circle cx="0" cy="0" r="2.6" fill="#181d25"/>
-      <circle cx="0" cy="0" r="1.1" fill="#959ca8"/>
-    </g>
-  </svg>`;
+  return generateTruckSvg(id, brand, capacity);
 }
+
+// -------------------------------------------------------------
+// ILUSTRACIÓN DE CORTE TRANSVERSAL: FORD F-350 3.5T (CAJA SECA CON COPETE)
+// -------------------------------------------------------------
 
 function generateDetailIllustration(vehicleOrCap = 59) {
   let capNum = 59;
-  let brand = 'Ford F-350 Super Duty';
-  let cleanId = 'det_truck';
+  let cleanId = 'det_f350';
 
   if (typeof vehicleOrCap === 'object' && vehicleOrCap !== null) {
     capNum = Math.max(0, Math.min(100, Number(vehicleOrCap.capacity) || 59));
-    brand = vehicleOrCap.model || 'Ford F-350 Super Duty';
     cleanId = (vehicleOrCap.id || 'det').replace(/[^a-zA-Z0-9]/g, '_');
   } else {
     capNum = Math.max(0, Math.min(100, Number(vehicleOrCap) || 59));
   }
 
-  const maxBayWidth = 145;
-  const fillWidth = Math.max(10, Math.round((maxBayWidth * capNum) / 100));
-
-  let accentColor = '#2563eb';
-  if (brand.includes('RAM')) accentColor = '#dc2626';
-  if (brand.includes('Chevrolet') || brand.includes('Silverado')) accentColor = '#f59e0b';
-  if (brand.includes('Isuzu')) accentColor = '#10b981';
+  // Max width of the cargo bay cutaway (compact 3.5T)
+  const maxBayWidth = 148;
+  const fillWidth = Math.max(14, Math.round((maxBayWidth * capNum) / 100));
 
   return `
   <div class="detail-truck-container">
-    <svg class="detail-truck-svg f350-detail-svg" viewBox="0 0 310 92" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="${brand} Camioneta Chasis Cabina 3.5T con Caja Seca y Copete">
+    <svg class="detail-truck-svg" viewBox="0 0 380 95" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Ford F-350 Super Duty Corte de Caja Seca 3.5T">
       <defs>
-        <linearGradient id="detCabGrad_${cleanId}" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#ffffff"/>
-          <stop offset="30%" stop-color="#e2e8f0"/>
-          <stop offset="70%" stop-color="#94a3b8"/>
-          <stop offset="100%" stop-color="#475569"/>
+        <!-- Cabina Ford Super Duty Gradient -->
+        <linearGradient id="detF350Cab_${cleanId}" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#f1f5f9"/>
+          <stop offset="35%" stop-color="#94a3b8"/>
+          <stop offset="100%" stop-color="#334155"/>
         </linearGradient>
-        <linearGradient id="detAlumGrad_${cleanId}" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#94a3b8"/>
-          <stop offset="30%" stop-color="#f1f5f9"/>
-          <stop offset="70%" stop-color="#cbd5e1"/>
-          <stop offset="100%" stop-color="#64748b"/>
+        <!-- Interior de la Caja Seca -->
+        <linearGradient id="detF350Bay_${cleanId}" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#1e293b"/>
+          <stop offset="50%" stop-color="#0f172a"/>
+          <stop offset="100%" stop-color="#020617"/>
         </linearGradient>
-        <linearGradient id="detBoxInteriorGrad_${cleanId}" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#1e2430"/>
-          <stop offset="50%" stop-color="#131720"/>
-          <stop offset="100%" stop-color="#0c0e14"/>
-        </linearGradient>
-        <linearGradient id="detLoadGrad_${cleanId}" x1="0%" y1="0%" x2="100%" y2="0%">
+        <!-- Carga Dinámica con Iluminación LED -->
+        <linearGradient id="detF350Load_${cleanId}" x1="0%" y1="0%" x2="100%" y2="0%">
           <stop offset="0%" stop-color="#2563eb" stop-opacity="0.85"/>
-          <stop offset="50%" stop-color="${accentColor}" stop-opacity="0.9"/>
-          <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.95"/>
+          <stop offset="50%" stop-color="#38bdf8" stop-opacity="0.9"/>
+          <stop offset="100%" stop-color="#06b6d4" stop-opacity="0.95"/>
         </linearGradient>
-        <linearGradient id="detRimGrad_${cleanId}" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#ffffff"/>
-          <stop offset="40%" stop-color="#cbd5e1"/>
-          <stop offset="80%" stop-color="#64748b"/>
+        <!-- Rines -->
+        <linearGradient id="detF350Rim_${cleanId}" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#e2e8f0"/>
+          <stop offset="50%" stop-color="#64748b"/>
           <stop offset="100%" stop-color="#1e293b"/>
         </linearGradient>
-        <pattern id="f350CargoGrid_${cleanId}" width="10" height="10" patternUnits="userSpaceOnUse">
-          <path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.8"/>
+        <pattern id="detF350Grid_${cleanId}" width="10" height="10" patternUnits="userSpaceOnUse">
+          <path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="0.8"/>
         </pattern>
       </defs>
 
-      <!-- GROUND SHADOW -->
-      <ellipse cx="155" cy="84" rx="145" ry="4" fill="#000000" opacity="0.6"/>
-      <line x1="10" y1="83.5" x2="300" y2="83.5" stroke="rgba(255,255,255,0.08)" stroke-width="1.5"/>
+      <!-- Sombra en suelo compacta -->
+      <ellipse cx="185" cy="87" rx="145" ry="4" fill="#000000" opacity="0.6"/>
+      <line x1="35" y1="86" x2="335" y2="86" stroke="rgba(255,255,255,0.08)" stroke-width="1.2"/>
 
-      <!-- CHASSIS RAIL & FUEL TANK -->
-      <rect x="120" y="62" width="160" height="5.5" rx="1" fill="#171a22" stroke="#334155" stroke-width="0.7"/>
-      <rect x="135" y="65" width="34" height="4.5" rx="0.5" fill="#0d1117" stroke="#1f2937" stroke-width="0.5"/>
+      <!-- ============================================== -->
+      <!-- 1. CABINA FORD F-350 SUPER DUTY                -->
+      <!-- ============================================== -->
+      <g class="det-cabina">
+        <!-- Larguero chasis de acero -->
+        <rect x="68" y="68" width="80" height="7" fill="#0f172a" stroke="#334155" stroke-width="0.8"/>
+        <!-- Tanque de combustible -->
+        <rect x="85" y="70" width="50" height="6" rx="1.5" fill="#1e293b" stroke="#475569" stroke-width="0.6"/>
 
-      <!-- ================= FORD F-350 CABIN ================= -->
-      <g class="detail-f350-cab">
-        <!-- Main Cab Silhouette -->
-        <path d="M 18 72 L 18 58 Q 18 52 22 46 L 28 43 Q 33 41 48 41 L 62 40 Q 68 38 72 33 L 86 20 Q 90 19 98 19 L 132 19 L 132 62 Q 128 51 114 51 Q 100 51 96 62 L 74 62 Q 69 51 55 51 Q 41 51 36 62 L 18 62 Z" fill="url(#detCabGrad_${cleanId})" stroke="#64748b" stroke-width="1"/>
+        <!-- Carrocería frontal de cabina -->
+        <path d="M 46 70 L 46 56 Q 46 51 50 49 L 72 48 Q 79 48 83 44 L 99 28 Q 104 24 116 24 L 144 24 L 144 70 L 132 70 Q 128 58 114 58 Q 100 58 97 70 L 68 70 Q 64 58 50 58 L 46 70 Z" fill="url(#detF350Cab_${cleanId})" stroke="#475569" stroke-width="1.1"/>
 
-        <!-- Front Bumper & Black Fender Flare -->
-        <path d="M 14 72 L 14 58 Q 14 55 18 55 L 30 55 L 30 72 Z" fill="#11141a" stroke="#2b3340" stroke-width="0.8"/>
-        <rect x="17" y="62" width="8" height="4" rx="1" fill="#090b0e"/>
-        <path d="M 36 62 Q 41 49 55 49 Q 69 49 74 62 L 70 62 Q 65 52 55 52 Q 45 52 40 62 Z" fill="#171b22" stroke="#2a3240" stroke-width="0.6"/>
+        <!-- Parrilla y cofre Ford -->
+        <path d="M 50 49 L 82 44 L 80 47 L 48 52 Z" fill="#475569" opacity="0.6"/>
+        <rect x="46" y="52" width="5" height="17" rx="1" fill="#94a3b8" stroke="#1e293b" stroke-width="0.7"/>
+        <line x1="46" y1="58" x2="51" y2="58" stroke="#0f172a" stroke-width="1"/>
+        <line x1="46" y1="64" x2="51" y2="64" stroke="#0f172a" stroke-width="1"/>
 
-        <!-- Grille & Headlight -->
-        <path d="M 18 43 L 26 43 L 26 55 L 18 55 Z" fill="#11151c" stroke="#252d3a" stroke-width="0.6"/>
-        <ellipse cx="22" cy="49" rx="2" ry="1.2" fill="#2563eb"/>
-        <path d="M 25 42 L 31 42 L 31 55 L 25 55 Z" fill="#0f172a" stroke="#334155" stroke-width="0.6"/>
-        <path d="M 26 44 L 30 44 L 30 49 L 26 49 Z" fill="#93c5fd"/>
-        <rect x="29.5" y="44" width="1.5" height="10" fill="#f59e0b"/>
+        <!-- Faros C-Clamp LED -->
+        <path d="M 49 51 L 55 50 L 54 57 L 50 57 Z" fill="#e0f2fe" stroke="#38bdf8" stroke-width="0.6"/>
+        <circle cx="52" cy="54" r="1.5" fill="#ffffff"/>
 
-        <!-- Windshield & Side Window with Super Duty dip -->
-        <path d="M 72 33 L 86 20 L 128 20 L 128 38 L 80 38 Q 75 38 72 33 Z" fill="#0f172a" stroke="#334155" stroke-width="0.8"/>
-        <line x1="85" y1="21" x2="81" y2="38" stroke="#181d26" stroke-width="1.4"/>
-        <path d="M 88 22 L 94 22 L 85 36 L 79 36 Z" fill="#ffffff" opacity="0.14"/>
-        <circle cx="95" cy="28" r="4" fill="#334155" opacity="0.7"/>
+        <!-- Ventana Lateral y Operador en cabina -->
+        <path d="M 88 43 L 100 30 Q 105 27 116 27 L 138 27 L 138 45 L 88 45 Z" fill="#0f172a" stroke="#334155" stroke-width="0.9"/>
+        <path d="M 104 30 L 112 30 L 96 44 L 90 44 Z" fill="#ffffff" opacity="0.14"/>
+        <circle cx="120" cy="36" r="4.5" fill="#334155"/>
+        <path d="M 112 45 Q 114 40 120 40 Q 126 40 128 45 Z" fill="#1e293b"/>
 
-        <!-- Tow Mirror -->
-        <path d="M 77 35 L 71 37 L 71 47 L 77 45 Z" fill="#0f172a" stroke="#334155" stroke-width="0.7"/>
-        <line x1="77" y1="37" x2="80" y2="37" stroke="#0f172a" stroke-width="1.2"/>
-        <line x1="77" y1="44" x2="80" y2="44" stroke="#0f172a" stroke-width="1.2"/>
-        <rect x="71" y="39" width="1" height="4" fill="#f59e0b"/>
+        <!-- Espejo de Remolque -->
+        <path d="M 90 42 L 82 42 L 82 50 L 90 49 Z" fill="#0f172a" stroke="#334155" stroke-width="0.7"/>
+        <line x1="82" y1="46" x2="86" y2="46" stroke="#f59e0b" stroke-width="1"/>
       </g>
 
-      <!-- ================= BOX BODY CUTAWAY (CARGO INTERIOR WITH OVER-CAB COPETE) ================= -->
-      <g class="detail-f350-box">
-        <!-- Outer Box Frame with Over-Cab Copete -->
-        <path d="M 78 12 L 86 8 L 285 8 L 285 62 L 132 62 L 132 25 L 82 25 Q 78 25 78 21 Z" fill="url(#detBoxInteriorGrad_${cleanId})" stroke="#475569" stroke-width="1.2"/>
-        <path d="M 82 14 L 88 11 L 281 11 L 281 59 L 135 59 L 135 27 L 85 27 Q 82 27 82 23 Z" fill="url(#f350CargoGrid_${cleanId})"/>
+      <!-- ============================================== -->
+      <!-- 2. CORTE DE CAJA SECA CON COPETE AERODINÁMICO -->
+      <!-- ============================================== -->
+      <g class="det-caja-corte">
+        <!-- Contorno exterior de la caja con copete sobre cabina -->
+        <path d="M 112 20 L 144 8 L 316 8 Q 320 8 320 12 L 320 70 L 144 70 L 144 26 L 112 26 Z" fill="#f8fafc" stroke="#475569" stroke-width="1.2"/>
 
-        <!-- Aluminum Edge Trims -->
-        <path d="M 78 12 L 86 8 L 285 8" stroke="url(#detAlumGrad_${cleanId})" stroke-width="2.5" fill="none"/>
-        <line x1="132" y1="62" x2="285" y2="62" stroke="url(#detAlumGrad_${cleanId})" stroke-width="2.5"/>
-        <line x1="285" y1="8" x2="285" y2="62" stroke="url(#detAlumGrad_${cleanId})" stroke-width="2.5"/>
-        <line x1="78" y1="12" x2="78" y2="24" stroke="url(#detAlumGrad_${cleanId})" stroke-width="2.5"/>
-        <line x1="132" y1="25" x2="132" y2="62" stroke="url(#detAlumGrad_${cleanId})" stroke-width="2"/>
+        <!-- Ventana de corte transversal interior -->
+        <rect x="152" y="14" width="160" height="52" rx="3" fill="url(#detF350Bay_${cleanId})" stroke="#334155" stroke-width="1.2"/>
+        <rect x="154" y="16" width="156" height="48" rx="2" fill="url(#detF350Grid_${cleanId})"/>
 
-        <!-- Over-Cab Attic Storage Shelf (Copete para carga ligera / insumos) -->
-        <line x1="82" y1="25" x2="132" y2="25" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3 2"/>
-        <text x="94" y="20" fill="#94a3b8" font-size="7" font-weight="600" font-family="sans-serif">COPETE</text>
+        <!-- Copete interior frontal (espacio de almacenaje superior) -->
+        <path d="M 116 24 L 142 14 L 142 24 Z" fill="#1e293b" stroke="#334155" stroke-width="0.6"/>
+        <rect x="120" y="19" width="16" height="4" rx="0.5" fill="#f59e0b" opacity="0.8"/>
 
-        <!-- DYNAMIC CARGO LOAD FILL IN MAIN BAY -->
-        <g class="detail-cargo-fill-group">
-          <rect id="detailCargoFillRect" x="136" y="15" width="${fillWidth}" height="44" rx="2" fill="url(#detLoadGrad_${cleanId})"/>
-          <!-- Over-cab copete partial fill if high capacity -->
-          ${capNum > 70 ? `<rect x="84" y="13" width="44" height="10" rx="1.5" fill="url(#detLoadGrad_${cleanId})" opacity="0.8"/>` : ''}
-          <!-- Pallet Dividers for 3.5T Cargo (4 Pallets standard) -->
-          <line x1="172" y1="14" x2="172" y2="59" stroke="rgba(255,255,255,0.25)" stroke-width="1" stroke-dasharray="3 3"/>
-          <line x1="208" y1="14" x2="208" y2="59" stroke="rgba(255,255,255,0.25)" stroke-width="1" stroke-dasharray="3 3"/>
-          <line x1="244" y1="14" x2="244" y2="59" stroke="rgba(255,255,255,0.25)" stroke-width="1" stroke-dasharray="3 3"/>
+        <!-- Rieles de amarre E-Track de acero -->
+        <line x1="154" y1="32" x2="308" y2="32" stroke="#64748b" stroke-width="1.2" stroke-dasharray="8 4"/>
+        <line x1="154" y1="48" x2="308" y2="48" stroke="#64748b" stroke-width="1.2" stroke-dasharray="8 4"/>
+
+        <!-- Carga Dinámica: Tarimas y Carga Volumétrica según capacidad -->
+        <g class="det-cargo-fill-group">
+          <!-- Bloque de carga fluida -->
+          <rect id="detailCargoFillRect" x="156" y="20" width="${fillWidth}" height="42" rx="2.5" fill="url(#detF350Load_${cleanId})"/>
+          
+          <!-- Separadores de tarimas y estibas -->
+          <line x1="195" y1="18" x2="195" y2="64" stroke="rgba(255,255,255,0.25)" stroke-width="1" stroke-dasharray="3 3"/>
+          <line x1="235" y1="18" x2="235" y2="64" stroke="rgba(255,255,255,0.25)" stroke-width="1" stroke-dasharray="3 3"/>
+          <line x1="275" y1="18" x2="275" y2="64" stroke="rgba(255,255,255,0.25)" stroke-width="1" stroke-dasharray="3 3"/>
         </g>
 
-        <!-- Logistic E-Track Rails along wall -->
-        <line x1="135" y1="30" x2="280" y2="30" stroke="#475569" stroke-width="1.2" stroke-dasharray="8 4"/>
-        <line x1="135" y1="46" x2="280" y2="46" stroke="#475569" stroke-width="1.2" stroke-dasharray="8 4"/>
+        <!-- Luces LED interiores de cabina de carga -->
+        <circle cx="178" cy="16" r="1.5" fill="#38bdf8"/>
+        <circle cx="230" cy="16" r="1.5" fill="#38bdf8"/>
+        <circle cx="282" cy="16" r="1.5" fill="#38bdf8"/>
 
-        <!-- Reflective Strip on lower skirt -->
-        <g class="detail-reflective" transform="translate(134, 59.5)">
-          <rect x="0" y="0" width="150" height="2" fill="#ef4444"/>
-          <rect x="0" y="0" width="14" height="2" fill="#ffffff"/>
-          <rect x="28" y="0" width="14" height="2" fill="#ffffff"/>
-          <rect x="56" y="0" width="14" height="2" fill="#ffffff"/>
-          <rect x="84" y="0" width="14" height="2" fill="#ffffff"/>
-          <rect x="112" y="0" width="14" height="2" fill="#ffffff"/>
-          <rect x="136" y="0" width="14" height="2" fill="#ffffff"/>
-        </g>
-
-        <!-- Clearance Marker Lights -->
-        <circle cx="88" cy="10" r="1.5" fill="#f59e0b"/>
-        <circle cx="106" cy="10" r="1.5" fill="#f59e0b"/>
-        <circle cx="282" cy="10" r="1.5" fill="#ef4444"/>
+        <!-- Marco y cerrojos de puerta trasera -->
+        <rect x="314" y="16" width="3" height="48" rx="0.5" fill="#334155"/>
+        <rect x="318" y="22" width="1.5" height="5" fill="#cbd5e1"/>
+        <rect x="318" y="52" width="1.5" height="5" fill="#cbd5e1"/>
       </g>
 
-      <!-- ================= WHEELS (8-LUG SUPER DUTY & DUALLIES) ================= -->
-      <!-- FRONT WHEEL (x=55, y=72) -->
-      <g class="wheel" transform="translate(55, 72)">
-        <circle cx="0" cy="0" r="11.5" fill="#090c10" stroke="#1f2530" stroke-width="1.2"/>
-        <circle cx="0" cy="0" r="7.8" fill="url(#detRimGrad_${cleanId})" stroke="#171b22" stroke-width="0.6"/>
-        <circle cx="0" cy="0" r="3.5" fill="#151922"/>
-        <circle cx="0" cy="0" r="1.5" fill="#94a3b8"/>
-        <circle cx="0" cy="-5" r="0.8" fill="#0d1117"/>
-        <circle cx="3.5" cy="-3.5" r="0.8" fill="#0d1117"/>
-        <circle cx="5" cy="0" r="0.8" fill="#0d1117"/>
-        <circle cx="3.5" cy="3.5" r="0.8" fill="#0d1117"/>
-        <circle cx="0" cy="5" r="0.8" fill="#0d1117"/>
-        <circle cx="-3.5" cy="3.5" r="0.8" fill="#0d1117"/>
-        <circle cx="-5" cy="0" r="0.8" fill="#0d1117"/>
-        <circle cx="-3.5" cy="-3.5" r="0.8" fill="#0d1117"/>
+      <!-- ============================================== -->
+      <!-- 3. RUEDAS 8 BIRLOS (DELANTERA Y TRASERA DUALLY)-->
+      <!-- ============================================== -->
+      <!-- Rueda Delantera -->
+      <g class="wheel" transform="translate(74, 72)">
+        <circle cx="0" cy="0" r="11.5" fill="#090d12" stroke="#1e293b" stroke-width="1.2"/>
+        <circle cx="0" cy="0" r="7.8" fill="url(#detF350Rim_${cleanId})" stroke="#0f172a" stroke-width="0.8"/>
+        <circle cx="0" cy="0" r="3.6" fill="#0f172a"/>
+        <circle cx="0" cy="0" r="1.5" fill="#cbd5e1"/>
       </g>
 
-      <!-- REAR DUALLY WHEELS (x=230, y=72) -->
-      <g class="wheel dually" transform="translate(230, 72)">
-        <ellipse cx="5" cy="0" rx="11.5" ry="11.5" fill="#090c10" stroke="#1a202c" stroke-width="1"/>
-        <circle cx="0" cy="0" r="11.5" fill="#090c10" stroke="#242c3b" stroke-width="1.2"/>
-        <circle cx="0" cy="0" r="7.5" fill="url(#detRimGrad_${cleanId})" stroke="#141820" stroke-width="0.6"/>
-        <circle cx="0" cy="0" r="4.2" fill="#0f141d" stroke="#334155" stroke-width="0.5"/>
-        <circle cx="0" cy="0" r="2" fill="#64748b"/>
-        <circle cx="0" cy="-5" r="0.8" fill="#0d1117"/>
-        <circle cx="3.5" cy="-3.5" r="0.8" fill="#0d1117"/>
-        <circle cx="5" cy="0" r="0.8" fill="#0d1117"/>
-        <circle cx="3.5" cy="3.5" r="0.8" fill="#0d1117"/>
-        <circle cx="0" cy="5" r="0.8" fill="#0d1117"/>
-        <circle cx="-3.5" cy="3.5" r="0.8" fill="#0d1117"/>
-        <circle cx="-5" cy="0" r="0.8" fill="#0d1117"/>
-        <circle cx="-3.5" cy="-3.5" r="0.8" fill="#0d1117"/>
+      <!-- Rueda Trasera Doble Rodado Dually -->
+      <g class="wheel" transform="translate(262, 72)">
+        <circle cx="0" cy="0" r="11.5" fill="#090d12" stroke="#1e293b" stroke-width="1.2"/>
+        <circle cx="0" cy="0" r="7.8" fill="url(#detF350Rim_${cleanId})" stroke="#0f172a" stroke-width="0.8"/>
+        <circle cx="0" cy="0" r="3.6" fill="#0f172a"/>
+        <circle cx="0" cy="0" r="1.5" fill="#cbd5e1"/>
       </g>
     </svg>
+
     <div class="detail-capacity-badge">
       <span id="capacityValue">${capNum}%</span>
-      <small>CARGA 3.5T</small>
+      <small>CARGA</small>
     </div>
   </div>`;
 }
 
 // -------------------------------------------------------------
-// MOTOR DE MAPAS EN VIVO REAL (LEAFLET + GOOGLE MAPS MÉXICO)
+// MOTOR DE MAPA INTERACTIVO GOOGLE MAPS / LEAFLET MÉXICO
 // -------------------------------------------------------------
-let liveLeafletMap = null;
-let currentTileLayer = null;
-let activeRouteLayer = null;
-let activeMarkersGroup = null;
-let currentMapLayerKey = 'google_roads';
 
-const mapTileProviders = {
+let realMapInstance = null;
+let currentTileLayer = null;
+let currentMapMarkers = [];
+let currentPolyline = null;
+
+const MAP_TILE_PROVIDERS = {
   google_roads: {
-    url: 'https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',
-    options: { maxZoom: 20, attribution: 'Google Maps' }
+    url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    options: { maxZoom: 19, attribution: '© OpenStreetMap & Google Maps' }
   },
   google_sat: {
-    url: 'https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}',
-    options: { maxZoom: 20, attribution: 'Google Maps Satélite' }
+    url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+    options: { maxZoom: 18, attribution: 'Esri Satellite & Maxar' }
   },
   carto_dark: {
     url: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
-    options: { maxZoom: 19, subdomains: 'abcd', attribution: 'CartoDB Dark' }
+    options: { maxZoom: 19, attribution: '© CartoDB Dark Matter' }
   }
 };
 
-function initRealMap() {
-  const mapEl = document.querySelector('#realLiveMap');
-  if (!mapEl || typeof L === 'undefined') return;
+let activeLayerName = 'google_roads';
 
-  if (liveLeafletMap) {
-    liveLeafletMap.invalidateSize();
-    return;
+function initRealMap() {
+  const mapContainer = document.getElementById('realLiveMap');
+  if (!mapContainer || typeof L === 'undefined') return;
+
+  if (realMapInstance) {
+    realMapInstance.remove();
+    realMapInstance = null;
   }
 
-  // Create Leaflet map centered on Mexico
-  liveLeafletMap = L.map('realLiveMap', {
+  // Initial center: Corredor Autopista 57 México-Querétaro
+  realMapInstance = L.map('realLiveMap', {
     zoomControl: false,
-    attributionControl: false,
-    fadeAnimation: true,
-    zoomAnimation: true
-  }).setView([23.6345, -102.5528], 5);
+    attributionControl: false
+  }).setView([20.3712, -99.9921], 8);
 
-  // Set default tile layer (Google Maps Calles)
-  setMapTileLayer('google_roads');
+  setMapTileLayer(activeLayerName);
 
-  // Layer groups for markers & route polyline
-  activeMarkersGroup = L.layerGroup().addTo(liveLeafletMap);
-  activeRouteLayer = L.layerGroup().addTo(liveLeafletMap);
-
-  // Layer buttons
-  document.querySelectorAll('.map-layer-selector .layer-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.map-layer-selector .layer-btn').forEach(b => b.classList.remove('active'));
+  // Bind layer switcher buttons
+  document.querySelectorAll('.map-layer-selector button').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      document.querySelectorAll('.map-layer-selector button').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      const layerKey = btn.dataset.layer || 'google_roads';
-      setMapTileLayer(layerKey);
+      const layerType = btn.dataset.layer;
+      setMapTileLayer(layerType);
       showToast(`Capa de mapa: ${btn.textContent}`);
     });
   });
 
-  // Map Controls
-  document.querySelector('#btnMapZoomIn')?.addEventListener('click', () => {
-    if (liveLeafletMap) liveLeafletMap.zoomIn();
+  // Bind map zoom controls
+  document.getElementById('btnMapZoomIn')?.addEventListener('click', () => {
+    if (realMapInstance) realMapInstance.zoomIn();
   });
-  document.querySelector('#btnMapZoomOut')?.addEventListener('click', () => {
-    if (liveLeafletMap) liveLeafletMap.zoomOut();
+  document.getElementById('btnMapZoomOut')?.addEventListener('click', () => {
+    if (realMapInstance) realMapInstance.zoomOut();
   });
-  document.querySelector('#btnMapCenter')?.addEventListener('click', () => {
+  document.getElementById('btnMapCenter')?.addEventListener('click', () => {
     const v = vehiclesData[currentVehicleId];
-    if (v && v.coords && liveLeafletMap) {
-      liveLeafletMap.flyTo([v.coords.current.lat, v.coords.current.lng], 13, { duration: 1 });
-      showToast(`GPS centrado: ${v.coords.current.name}`);
+    if (realMapInstance && v && v.coords) {
+      realMapInstance.flyTo(v.coords.current, 12, { duration: 1.2 });
+      showToast(`Centrado en Ford F-350 (${v.id})`);
     }
   });
 
-  // Render active vehicle route
-  const currentV = vehiclesData[currentVehicleId];
-  if (currentV) {
-    updateRealMapForVehicle(currentV);
+  // Update map with default active vehicle
+  const initialV = vehiclesData[currentVehicleId];
+  if (initialV) {
+    updateRealMapForVehicle(initialV);
   }
 }
 
-function setMapTileLayer(layerKey) {
-  if (!liveLeafletMap || !mapTileProviders[layerKey]) return;
-  currentMapLayerKey = layerKey;
+function setMapTileLayer(layerName) {
+  if (!realMapInstance || !MAP_TILE_PROVIDERS[layerName]) return;
+  activeLayerName = layerName;
 
   if (currentTileLayer) {
-    liveLeafletMap.removeLayer(currentTileLayer);
+    realMapInstance.removeLayer(currentTileLayer);
   }
 
-  const prov = mapTileProviders[layerKey];
-  currentTileLayer = L.tileLayer(prov.url, prov.options).addTo(liveLeafletMap);
+  const provider = MAP_TILE_PROVIDERS[layerName];
+  currentTileLayer = L.tileLayer(provider.url, provider.options).addTo(realMapInstance);
 }
 
 function updateRealMapForVehicle(vehicle) {
-  if (!vehicle) return;
+  if (!realMapInstance || !vehicle || !vehicle.coords) return;
 
-  const fallbackCoords = {
-    origin: { lat: 19.4326, lng: -99.1332, name: vehicle.origin || 'CDMX' },
-    current: { lat: 20.3712, lng: -99.9921, name: 'Autopista Federal · En Ruta', highway: vehicle.corridor || 'Autopista Federal', km: 'KM 120', text: '20.3712° N, -99.9921° W' },
-    destination: { lat: 25.6866, lng: -100.3161, name: vehicle.destination || 'Destino' },
-    casetas: [],
-    routePoints: [[19.4326, -99.1332], [20.3712, -99.9921], [25.6866, -100.3161]]
-  };
-
-  const coords = vehicle.coords || fallbackCoords;
-
-  // Update HUD
-  const hwyEl = document.querySelector('#mapGpsHighway');
-  if (hwyEl) hwyEl.textContent = `${coords.current.highway || vehicle.corridor} · ${coords.current.km || 'KM 148'}`;
-
-  const coordsEl = document.querySelector('#mapGpsCoords');
-  if (coordsEl) coordsEl.textContent = coords.current.text || `${coords.current.lat.toFixed(4)}° N, ${coords.current.lng.toFixed(4)}° W`;
-
-  // Update Google Maps Direct Link
-  const gmapsBtn = document.querySelector('#btnOpenGoogleMaps');
-  if (gmapsBtn) {
-    const origStr = `${coords.origin.lat},${coords.origin.lng}`;
-    const destStr = `${coords.destination.lat},${coords.destination.lng}`;
-    gmapsBtn.href = `https://www.google.com/maps/dir/?api=1&origin=${origStr}&destination=${destStr}&travelmode=driving`;
+  // Clear previous markers & polylines
+  currentMapMarkers.forEach(m => realMapInstance.removeLayer(m));
+  currentMapMarkers = [];
+  if (currentPolyline) {
+    realMapInstance.removeLayer(currentPolyline);
+    currentPolyline = null;
   }
 
-  if (!liveLeafletMap || typeof L === 'undefined') return;
+  const { origin, destination, current, highway, casetas, routePoints } = vehicle.coords;
 
-  // Clear previous layers
-  if (activeMarkersGroup) activeMarkersGroup.clearLayers();
-  if (activeRouteLayer) activeRouteLayer.clearLayers();
-
-  // 1. Draw glowing route polyline
-  if (coords.routePoints && coords.routePoints.length > 0) {
-    // Background glow shadow
-    L.polyline(coords.routePoints, {
+  // 1. Draw Route Polyline
+  if (routePoints && routePoints.length > 0) {
+    currentPolyline = L.polyline(routePoints, {
       color: '#38bdf8',
-      weight: 8,
-      opacity: 0.35,
+      weight: 4.5,
+      opacity: 0.9,
       lineCap: 'round',
-      lineJoin: 'round'
-    }).addTo(activeRouteLayer);
-
-    // Main sharp polyline
-    L.polyline(coords.routePoints, {
-      color: '#2563eb',
-      weight: 4,
-      opacity: 0.95,
-      lineCap: 'round',
-      lineJoin: 'round'
-    }).addTo(activeRouteLayer);
+      lineJoin: 'round',
+      dashArray: null
+    }).addTo(realMapInstance);
   }
 
-  // 2. Add Origin Pin (Green)
+  // 2. Custom HTML Icons
+  // Origin Icon
   const originIcon = L.divIcon({
-    className: 'custom-origin-pin',
-    html: `<div class="origin-map-pin"><span>🟢</span><span>${coords.origin.name}</span></div>`,
-    iconSize: [110, 26],
-    iconAnchor: [55, 13]
+    className: 'custom-map-icon',
+    html: `<div class="origin-map-pin" title="${vehicle.origin}"><span>O</span></div>`,
+    iconSize: [24, 24],
+    iconAnchor: [12, 12]
   });
-  L.marker([coords.origin.lat, coords.origin.lng], { icon: originIcon })
-    .bindPopup(`<b>Origen:</b> ${coords.origin.name}<br><small>Patio de salida de carga</small>`)
-    .addTo(activeMarkersGroup);
+  const originMarker = L.marker(origin, { icon: originIcon })
+    .bindPopup(`<strong style="font-size:11px;">Origen: ${vehicle.origin}</strong><br><small style="color:#64748b;">Salida: ${vehicle.departureTime}</small>`)
+    .addTo(realMapInstance);
+  currentMapMarkers.push(originMarker);
 
-  // 3. Add Destination Pin (Red)
+  // Destination Icon
   const destIcon = L.divIcon({
-    className: 'custom-dest-pin',
-    html: `<div class="dest-map-pin"><span>🏁</span><span>${coords.destination.name}</span></div>`,
-    iconSize: [115, 26],
-    iconAnchor: [57, 13]
+    className: 'custom-map-icon',
+    html: `<div class="dest-map-pin" title="${vehicle.destination}"><span>D</span></div>`,
+    iconSize: [24, 24],
+    iconAnchor: [12, 12]
   });
-  L.marker([coords.destination.lat, coords.destination.lng], { icon: destIcon })
-    .bindPopup(`<b>Destino:</b> ${coords.destination.name}<br><small>Punto de entrega y descarga</small>`)
-    .addTo(activeMarkersGroup);
+  const destMarker = L.marker(destination, { icon: destIcon })
+    .bindPopup(`<strong style="font-size:11px;">Destino: ${vehicle.destination}</strong><br><small style="color:#64748b;">ETA: ${vehicle.eta}</small>`)
+    .addTo(realMapInstance);
+  currentMapMarkers.push(destMarker);
 
-  // 4. Add Casetas (Toll Plazas) if present
-  if (coords.casetas && coords.casetas.length > 0) {
-    coords.casetas.forEach(c => {
+  // Casetas de Cobro Icons
+  if (casetas && casetas.length > 0) {
+    casetas.forEach(c => {
       const casetaIcon = L.divIcon({
-        className: 'custom-caseta-pin',
-        html: `<div class="caseta-map-pin"><span>💳</span><span>${c.name}</span></div>`,
-        iconSize: [95, 22],
-        iconAnchor: [47, 11]
+        className: 'custom-map-icon',
+        html: `<div class="caseta-map-pin" title="${c.name}"><span>$</span></div>`,
+        iconSize: [18, 18],
+        iconAnchor: [9, 9]
       });
-      L.marker([c.lat, c.lng], { icon: casetaIcon })
-        .bindPopup(`<b>${c.name}</b><br><small>Telepeaje IAVE / CAPUFE</small>`)
-        .addTo(activeMarkersGroup);
+      const casetaMarker = L.marker([c.lat, c.lng], { icon: casetaIcon })
+        .bindPopup(`<strong style="font-size:10px; color:#f59e0b;">${c.name}</strong><br><small style="font-size:9px;">Peaje: ${c.cost} · Tag IAVE Activo</small>`)
+        .addTo(realMapInstance);
+      currentMapMarkers.push(casetaMarker);
     });
   }
 
-  // 5. Add Live Truck Marker (Custom Pulse & F-350 Truck Icon)
+  // 3. Live Ford F-350 Truck GPS Marker with Animated Radar Pulse
   const truckIcon = L.divIcon({
-    className: 'custom-truck-pin',
+    className: 'custom-truck-icon',
     html: `
       <div class="truck-map-marker">
-        <div class="marker-pulse-ring"></div>
-        <div class="marker-truck-icon">
-          <svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:none;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        <div class="truck-marker-pulse"></div>
+        <div class="truck-marker-body">
+          <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:#ffffff;stroke-width:2;">
+            <rect x="1" y="3" width="15" height="13" rx="1"/>
+            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+            <circle cx="5.5" cy="18.5" r="2.5"/>
+            <circle cx="18.5" cy="18.5" r="2.5"/>
+          </svg>
         </div>
-        <div class="marker-speed-tag">${vehicle.speed}</div>
       </div>
     `,
-    iconSize: [40, 52],
-    iconAnchor: [20, 26]
+    iconSize: [32, 32],
+    iconAnchor: [16, 16]
   });
 
-  L.marker([coords.current.lat, coords.current.lng], { icon: truckIcon, zIndexOffset: 1000 })
+  const truckMarker = L.marker(current, { icon: truckIcon, zIndexOffset: 1000 })
     .bindPopup(`
-      <div style="font-size:10px;">
-        <strong style="color:#38bdf8;">Unidad ${vehicle.id}</strong> (${vehicle.model})<br>
-        <b>Operador:</b> ${vehicle.driver.name}<br>
-        <b>Ubicación:</b> ${coords.current.name}<br>
-        <b>Velocidad:</b> ${vehicle.speed} · Diésel: ${vehicle.fuel}%
+      <div style="font-family:'DM Sans',sans-serif; min-width:140px;">
+        <strong style="color:#38bdf8; font-size:11px; display:block;">Ford F-350 · ${vehicle.id}</strong>
+        <span style="font-size:9.5px; color:#94a3b8; display:block;">Velocidad: <b>${vehicle.speed}</b></span>
+        <span style="font-size:9px; color:#cbd5e1; display:block; margin-top:2px;">Operador: ${vehicle.driver.name}</span>
+        <span style="font-size:8.5px; color:#10b981; display:block; margin-top:2px;">● GPS Satelital Activo</span>
       </div>
     `)
-    .addTo(activeMarkersGroup);
+    .addTo(realMapInstance);
+  currentMapMarkers.push(truckMarker);
 
-  // 6. Smoothly fly map view to fit route bounds
-  const points = coords.routePoints && coords.routePoints.length > 0 ? coords.routePoints : [[coords.origin.lat, coords.origin.lng], [coords.destination.lat, coords.destination.lng]];
-  const bounds = L.latLngBounds(points);
-  liveLeafletMap.invalidateSize();
-  liveLeafletMap.flyToBounds(bounds, {
-    padding: [25, 25],
-    maxZoom: 13,
-    duration: 1.2
-  });
+  // Smooth camera zoom/fly to route bounds
+  if (currentPolyline) {
+    realMapInstance.fitBounds(currentPolyline.getBounds(), {
+      padding: [30, 30],
+      maxZoom: 12,
+      animate: true,
+      duration: 1.0
+    });
+  } else {
+    realMapInstance.flyTo(current, 10, { duration: 1.0 });
+  }
+
+  // Update HUD elements
+  const hudHighway = document.getElementById('mapGpsHighway');
+  if (hudHighway && highway) hudHighway.textContent = highway;
+
+  const hudCoords = document.getElementById('mapGpsCoords');
+  if (hudCoords && current) {
+    hudCoords.textContent = `${current[0].toFixed(4)}° N, ${current[1].toFixed(4)}° W`;
+  }
+
+  // Update Direct Google Maps Navigation Link
+  const btnGoogleMaps = document.getElementById('btnOpenGoogleMaps');
+  if (btnGoogleMaps) {
+    btnGoogleMaps.href = `https://www.google.com/maps/dir/?api=1&origin=${origin[0]},${origin[1]}&destination=${destination[0]},${destination[1]}`;
+  }
 }
 
 // -------------------------------------------------------------
@@ -1280,8 +1236,11 @@ function renderDetailTabs(vehicle) {
   const routeKm = document.querySelector('#routeRemainingKm');
   if (routeKm) routeKm.textContent = vehicle.remainingKm;
 
-  // Actualizar mapa satelital real de Google Maps con la unidad activa
-  updateRealMapForVehicle(vehicle);
+  const [orig, dest] = vehicle.route.split('→').map(s => s.trim().toUpperCase());
+  const mapOrigin = document.querySelector('#mapOrigin');
+  const mapDest = document.querySelector('#mapDest');
+  if (mapOrigin && orig) mapOrigin.textContent = orig;
+  if (mapDest && dest) mapDest.textContent = dest;
 
   // Tab 2: Datos de unidad (Telemetría IoT)
   const tabVehicle = document.querySelector('#tab-vehicle');
@@ -1470,6 +1429,7 @@ function selectVehicle(id, triggerToast = true) {
   });
 
   renderDetailTabs(vehicle);
+  updateRealMapForVehicle(vehicle);
 
   if (triggerToast) {
     showToast(`Monitoreando unidad ${vehicle.id} (${vehicle.route})`);
@@ -1485,10 +1445,10 @@ const chatThreads = [
     id: 'MX-752069247',
     driver: 'Juan Carlos Méndez',
     unit: 'MX-752069247',
-    model: 'Ford F-350 Super Duty 2024',
+    model: 'Freightliner Cascadia 2024',
     theme: 'freightliner',
     route: 'CDMX → Monterrey',
-    speed: '84 km/h',
+    speed: '85 km/h',
     location: 'Autopista 57D · Palmillas',
     lastMsg: 'Todo en orden base, pasando caseta Palmillas sin contratiempos.',
     time: '12:40',
@@ -1496,16 +1456,16 @@ const chatThreads = [
     channel: 'CH-19 · 27.185 MHz',
     isAlert: false,
     messages: [
-      { from: 'in', author: 'Operador (Cabina)', text: 'Base PAVA, reportando salida de patio Vallejo con sellos fiscales SAT intactos en la caja seca.', time: '02:40' },
-      { from: 'out', author: 'Base Central Tráfico', text: 'Enterado Juan Carlos. Velocidad crucero en autopista 57 es 84 km/h. Monitoreo satelital activo en tu F-350.', time: '02:42' },
-      { from: 'in', author: 'Operador (Cabina)', text: 'Todo en orden base, pasando caseta Palmillas sin contratiempos. Estiba y amarres asegurados.', time: '12:40' }
+      { from: 'in', author: 'Operador (Cabina)', text: 'Base PAVA, reportando salida de patio Vallejo con sellos fiscales SAT intactos.', time: '02:40' },
+      { from: 'out', author: 'Base Central Tráfico', text: 'Enterado Juan Carlos. Velocidad crucero en autopista 57 es 85 km/h. Monitoreo satelital activo.', time: '02:42' },
+      { from: 'in', author: 'Operador (Cabina)', text: 'Todo en orden base, pasando caseta Palmillas sin contratiempos. Temperatura de termógrafo estable a 4°C.', time: '12:40' }
     ]
   },
   {
     id: 'MX-93633762',
     driver: 'Gabriel Soto Villalobos',
     unit: 'MX-93633762',
-    model: 'Ford F-350 Chasis Cabina 2023',
+    model: 'Kenworth T680 2024',
     theme: 'kenworth',
     route: 'Manzanillo → Guadalajara',
     speed: '78 km/h',
@@ -1516,7 +1476,7 @@ const chatThreads = [
     channel: 'CH-14 · 27.125 MHz',
     isAlert: false,
     messages: [
-      { from: 'in', author: 'Operador (Cabina)', text: 'Embarque de electrónica cargado en puerto Contecon Manzanillo. Sellos de seguridad en caja de 14ft verificados.', time: '05:30' },
+      { from: 'in', author: 'Operador (Cabina)', text: 'Embarque de electrónica cargado en puerto Contecon Manzanillo. Sellos de seguridad verificados.', time: '05:30' },
       { from: 'out', author: 'Base Central Tráfico', text: 'Custodia armada asignada con la patrulla PAVA-SEC-04. Punto de reunión en km 45.', time: '05:35' },
       { from: 'in', author: 'Operador (Cabina)', text: 'Custodia armada confirmada y posicionada en retén. Iniciando ascenso hacia Guadalajara.', time: '11:15' }
     ]
@@ -1525,7 +1485,7 @@ const chatThreads = [
     id: 'MX-916472621',
     driver: 'José Luis Cárdenas',
     unit: 'MX-916472621',
-    model: 'RAM 4000 Heavy Duty 2023',
+    model: 'International LT 2024',
     theme: 'international',
     route: 'Veracruz → Puebla',
     speed: '42 km/h',
@@ -1543,9 +1503,9 @@ const chatThreads = [
   },
   {
     id: 'MX-752263347',
-    driver: 'Raúl Mendoza Saldaña',
+    driver: 'Roberto Garza Elizondo',
     unit: 'MX-752263347',
-    model: 'Ford F-450 Super Duty 2024',
+    model: 'Kenworth T680 2024',
     theme: 'kenworth',
     route: 'Monterrey → Nuevo Laredo',
     speed: '96 km/h',
@@ -1556,18 +1516,18 @@ const chatThreads = [
     channel: 'CH-19 · 27.185 MHz',
     isAlert: true,
     messages: [
-      { from: 'out', author: 'Base Central Tráfico', text: 'ALERTA TELEMETRÍA: Velocidad registrada en 96 km/h en autopista federal. Límite SCT para 4.5T es 90 km/h.', time: '04:20' },
+      { from: 'out', author: 'Base Central Tráfico', text: 'ALERTA TELEMETRÍA: Velocidad registrada en 96 km/h en autopista federal. Límite SCT es 90 km/h.', time: '04:20' },
       { from: 'in', author: 'Operador (Cabina)', text: 'Copiado base, ajustando velocidad a 85 km/h. Mucho viento lateral en la recta de Sabinas.', time: '04:22' }
     ]
   },
   {
     id: 'MX-118134203',
-    driver: 'Alonso Valenzuela Soto',
+    driver: 'Ernesto Valenzuela',
     unit: 'MX-118134203',
-    model: 'Ford F-350 Super Duty 2024',
+    model: 'Scania R 450 2024',
     theme: 'scania',
     route: 'Tijuana → Mexicali',
-    speed: '75 km/h',
+    speed: '65 km/h',
     location: 'La Rumorosa · Caseta El Hongo',
     lastMsg: 'Telepeaje IAVE validado en caseta. Todo en orden.',
     time: '01:58',
@@ -1575,16 +1535,16 @@ const chatThreads = [
     channel: 'CH-11 · 27.085 MHz',
     isAlert: false,
     messages: [
-      { from: 'in', author: 'Operador (Cabina)', text: 'Comenzando cruce de La Rumorosa con insumos médicos termocontrolados.', time: '01:20' },
-      { from: 'out', author: 'Base Central Tráfico', text: 'Verifica temperatura de balatas y freno motor auxiliar en la bajada.', time: '01:22' },
-      { from: 'in', author: 'Operador (Cabina)', text: 'Telepeaje IAVE validado en caseta El Hongo. Balatas a 90°C (Rango óptimo).', time: '01:58' }
+      { from: 'in', author: 'Operador (Cabina)', text: 'Comenzando cruce de La Rumorosa con carga de maquinaria pesada.', time: '01:20' },
+      { from: 'out', author: 'Base Central Tráfico', text: 'Verifica temperatura de balatas y frenos de motor auxiliar.', time: '01:22' },
+      { from: 'in', author: 'Operador (Cabina)', text: 'Telepeaje IAVE validado en caseta El Hongo. Frenos a 115°C (Rango óptimo).', time: '01:58' }
     ]
   },
   {
     id: 'MX-118945307',
     driver: 'Mario Alberto Trejo',
     unit: 'MX-118945307',
-    model: 'Ford F-350 Super Duty 2024',
+    model: 'Renault Master 2024',
     theme: 'van',
     route: 'Querétaro → León',
     speed: '88 km/h',
@@ -1595,7 +1555,7 @@ const chatThreads = [
     channel: 'CH-09 · 27.065 MHz',
     isAlert: false,
     messages: [
-      { from: 'in', author: 'Operador (Cabina)', text: 'Saliendo de CEDIS El Marqués con autopartes urgentes Just-In-Time en caja 16ft.', time: '01:10' },
+      { from: 'in', author: 'Operador (Cabina)', text: 'Saliendo de CEDIS El Marqués con autopartes urgentes Just-In-Time.', time: '01:10' },
       { from: 'in', author: 'Operador (Cabina)', text: 'Arribando a patio de descarga General Motors Complejo Silao. Entregando remesa.', time: '03:15' },
       { from: 'out', author: 'Base Central Tráfico', text: 'Excelente tiempo de tránsito Mario. Favor de recabar firma electrónica de recibo.', time: '03:16' }
     ]
@@ -1666,7 +1626,7 @@ function renderChatApp() {
             ${isOut ? '<span class="checkmarks"><svg viewBox="0 0 24 24" class="svg-icon-checks" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;display:inline-block;vertical-align:-2px;"><path d="m18 6-8.5 8.5-4-4"/><path d="m22 10-8.5 8.5-2.5-2.5"/></svg></span>' : ''}
           </div>
         </div>
-        ${isOut ? `<div class="chat-msg-avatar" style="color:#60a5fa;">AM</div>` : ''}
+        ${isOut ? `<div class="chat-msg-avatar" style="color:#60a5fa;">JG</div>` : ''}
       </div>
     `;
   }).join('');
@@ -1989,14 +1949,14 @@ function renderTables() {
       <table class="pava-table">
         <thead>
           <tr>
-            <th>Folio Viaje</th><th>Ruta Completada</th><th>Unidad</th><th>Operador</th><th>Fecha Entrega</th><th>Flete Total</th><th>Estatus</th>
+            <th>Folio Viaje</th><th>Ruta Completada</th><th>Tractocamión</th><th>Operador</th><th>Fecha Entrega</th><th>Flete Total</th><th>Estatus</th>
           </tr>
         </thead>
         <tbody>
-          <tr><td><strong>VIAJE-MX-4412</strong></td><td>Guadalajara → Monterrey</td><td>MX-752069247 (Ford F-350)</td><td>Juan Carlos Méndez</td><td>06 Sep 2024</td><td>$22,800.00</td><td><span style="color:#34d399; font-weight:700;">Entregado a Tiempo</span></td></tr>
-          <tr><td><strong>VIAJE-MX-4411</strong></td><td>CDMX → Veracruz Puerto</td><td>MX-93633762 (Ford F-350)</td><td>Gabriel Soto</td><td>05 Sep 2024</td><td>$16,400.00</td><td><span style="color:#34d399; font-weight:700;">Entregado a Tiempo</span></td></tr>
-          <tr><td><strong>VIAJE-MX-4410</strong></td><td>Monterrey → Altamira</td><td>MX-752263347 (Ford F-450)</td><td>Raúl Mendoza</td><td>04 Sep 2024</td><td>$18,100.00</td><td><span style="color:#34d399; font-weight:700;">Entregado a Tiempo</span></td></tr>
-          <tr><td><strong>VIAJE-MX-4409</strong></td><td>Toluca → San Luis Potosí</td><td>MX-118945307 (Ford F-350)</td><td>Mario Trejo</td><td>03 Sep 2024</td><td>$14,500.00</td><td><span style="color:#34d399; font-weight:700;">Entregado a Tiempo</span></td></tr>
+          <tr><td><strong>VIAJE-MX-4412</strong></td><td>Guadalajara → Monterrey</td><td>MX-752069247</td><td>Juan Carlos Méndez</td><td>06 Sep 2024</td><td>$42,800.00</td><td><span style="color:#34d399; font-weight:700;">Entregado a Tiempo</span></td></tr>
+          <tr><td><strong>VIAJE-MX-4411</strong></td><td>CDMX → Veracruz Puerto</td><td>MX-93633762</td><td>Gabriel Soto</td><td>05 Sep 2024</td><td>$26,400.00</td><td><span style="color:#34d399; font-weight:700;">Entregado a Tiempo</span></td></tr>
+          <tr><td><strong>VIAJE-MX-4410</strong></td><td>Monterrey → Altamira</td><td>MX-752263347</td><td>Raúl Mendoza</td><td>04 Sep 2024</td><td>$34,100.00</td><td><span style="color:#34d399; font-weight:700;">Entregado a Tiempo</span></td></tr>
+          <tr><td><strong>VIAJE-MX-4409</strong></td><td>Toluca → San Luis Potosí</td><td>MX-118945307</td><td>Mario Trejo</td><td>03 Sep 2024</td><td>$19,500.00</td><td><span style="color:#34d399; font-weight:700;">Entregado a Tiempo</span></td></tr>
         </tbody>
       </table>
     `;
@@ -2008,9 +1968,26 @@ function renderTables() {
 // -------------------------------------------------------------
 
 function switchView(viewName) {
+  const appShell = document.querySelector('.app-shell');
+  if (appShell) {
+    if (viewName === 'tracking') {
+      appShell.classList.remove('hide-details');
+      setTimeout(() => {
+        if (realMapInstance) realMapInstance.invalidateSize();
+      }, 120);
+    } else {
+      appShell.classList.add('hide-details');
+    }
+  }
+
   document.querySelectorAll('.nav-item').forEach(b => {
     b.classList.toggle('active', b.dataset.view === viewName);
   });
+  const groupedRequestViews = ['camiones', 'carga', 'reportes', 'operadores'];
+  document.querySelector('.nav-group-btn')?.classList.toggle(
+    'active',
+    window.matchMedia('(max-width: 900px)').matches && groupedRequestViews.includes(viewName)
+  );
   document.querySelectorAll('.sub-item').forEach(b => {
     b.classList.toggle('active', b.dataset.view === viewName);
   });
@@ -2033,7 +2010,7 @@ function switchView(viewName) {
     'dashboard': { title: 'Dashboard General', eye: 'Métricas / Indicadores Clave' },
     'chats': { title: 'Comunicaciones de Tráfico', eye: 'Cabina / Mensajería en Vivo' },
     'socios': { title: 'Socios Comerciales', eye: 'Directorio / Cuentas Clave' },
-    'camiones': { title: 'Parque Vehicular', eye: 'Activos / Camionetas 3.5T y Cajas' },
+    'camiones': { title: 'Parque Vehicular', eye: 'Activos / Tractos y Cajas' },
     'carga': { title: 'Manifiestos de Carga', eye: 'Inventario en Tránsito' },
     'reportes': { title: 'Reportes de Incidencias', eye: 'Seguridad / Auditoría' },
     'operadores': { title: 'Padrón de Operadores', eye: 'Recursos Humanos / SCT' },
@@ -2049,18 +2026,6 @@ function switchView(viewName) {
   if (viewName === 'chats') renderChatApp();
   if (viewName === 'socios') renderSociosView();
   if (['camiones', 'carga', 'reportes', 'operadores', 'historial'].includes(viewName)) renderTables();
-
-  if (viewName === 'tracking') {
-    setTimeout(() => {
-      if (liveLeafletMap) {
-        liveLeafletMap.invalidateSize();
-        const v = vehiclesData[currentVehicleId];
-        if (v) updateRealMapForVehicle(v);
-      } else {
-        initRealMap();
-      }
-    }, 100);
-  }
 
   if (['camiones', 'carga', 'reportes', 'operadores'].includes(viewName)) {
     document.querySelector('.nav-group')?.classList.add('open');
@@ -2078,6 +2043,11 @@ document.querySelectorAll('.nav-item[data-view], .sub-item[data-view]').forEach(
 });
 
 document.querySelector('.nav-group-btn')?.addEventListener('click', () => {
+  if (window.matchMedia('(max-width: 900px)').matches) {
+    switchView('camiones');
+    return;
+  }
+
   document.querySelector('.nav-group')?.classList.toggle('open');
 });
 
@@ -2119,31 +2089,17 @@ document.querySelector('#formNewRequest')?.addEventListener('submit', (e) => {
   e.preventDefault();
   const origin = document.querySelector('#reqOrigin')?.value || 'CDMX';
   const dest = document.querySelector('#reqDest')?.value || 'Monterrey';
-  const model = document.querySelector('#reqModel')?.value || 'Ford F-350 Super Duty';
+  const model = document.querySelector('#reqModel')?.value || 'Kenworth T680';
   const capacity = Number(document.querySelector('#reqCapacity')?.value) || 75;
   const driver = document.querySelector('#reqDriver')?.value || 'Operador PAVA';
-  const cargo = document.querySelector('#reqCargo')?.value || 'Carga General 3.5T';
+  const cargo = document.querySelector('#reqCargo')?.value || 'Carga General';
 
   const newId = 'MX-' + Math.floor(10000000 + Math.random() * 90000000);
   const isVan = model.includes('Sprinter') || model.includes('Master');
 
-  // Coordenadas para nuevas rutas generadas dinámicamente en México
-  const newCoords = {
-    origin: { lat: 19.4326, lng: -99.1332, name: origin },
-    current: { lat: 20.3712, lng: -99.9921, name: `${origin} → ${dest} (En Tránsito Carretero)`, highway: 'Autopista Federal de Cuota', km: 'KM 148', text: '20.3712° N, -99.9921° W' },
-    destination: { lat: 25.6866, lng: -100.3161, name: dest },
-    casetas: [
-      { lat: 19.7042, lng: -99.2312, name: 'Caseta de Salida' },
-      { lat: 20.3712, lng: -99.9921, name: 'Caseta Troncal CAPUFE' }
-    ],
-    routePoints: [
-      [19.4326, -99.1332], [19.7042, -99.2312], [20.3712, -99.9921], [22.1565, -100.9855], [25.6866, -100.3161]
-    ]
-  };
-
   vehiclesData[newId] = {
     id: newId,
-    model: model.includes('202') ? model : model + ' 2024',
+    model: model + ' 2024',
     type: isVan ? 'van' : 'truck',
     route: `${origin} → ${dest}`,
     origin: origin,
@@ -2157,19 +2113,18 @@ document.querySelector('#formNewRequest')?.addEventListener('submit', (e) => {
     departureTime: 'Ahora',
     remainingTime: '06:30:00',
     remainingKm: '420 km restantes',
-    speed: '82 km/h',
+    speed: '80 km/h',
     fuel: 95,
     odometer: '12,400 km',
-    plates: '99-ZZ-1A (SCT 3.5T)',
-    vin: '1FT8W3BT' + Math.floor(100000000 + Math.random() * 900000000),
-    engine: '6.7L Power Stroke V8 Turbo Diésel 330 HP',
-    tempBrakes: '92 °C',
-    tirePressure: '80 PSI',
-    coords: newCoords,
+    plates: '99-ZZ-1A (SCT)',
+    vin: '3AKJ' + Math.floor(1000000000 + Math.random() * 9000000000),
+    engine: 'Motor Turbo Diésel 2024',
+    tempBrakes: '100 °C',
+    tirePressure: '110 PSI',
     driver: {
       name: driver,
       phone: '+52 55 ' + Math.floor(10000000 + Math.random() * 90000000),
-      license: 'Licencia Federal Tipo B (3.5T)',
+      license: 'Licencia Federal Tipo B',
       licenseExp: '10/Dic/2027',
       medicalExp: 'Vigente',
       rating: '5.0 ★',
@@ -2177,18 +2132,18 @@ document.querySelector('#formNewRequest')?.addEventListener('submit', (e) => {
     },
     cargo: {
       type: cargo,
-      weight: '3.2 Toneladas',
-      pallets: '5 Tarimas',
+      weight: '22.0 Toneladas',
+      pallets: '24 Tarimas',
       sealNumber: 'SAT-MX-' + Math.floor(100000 + Math.random() * 900000),
-      tempReefer: 'Caja Seca con Copete',
-      client: 'Cliente PAVA Track',
-      declaredValue: '$650,000.00 MXN'
+      tempReefer: 'Seco',
+      client: 'Cliente General PAVA',
+      declaredValue: '$1,500,000.00 MXN'
     },
     billing: {
-      subtotal: '$16,000.00',
-      iva: '$2,560.00',
-      retention: '-$640.00',
-      total: '$17,920.00 MXN',
+      subtotal: '$35,000.00',
+      iva: '$5,600.00',
+      retention: '-$1,400.00',
+      total: '$39,200.00 MXN',
       status: 'Timbrado SAT / Despachado',
       uuid: 'UUID-' + Math.floor(1000000 + Math.random() * 9000000),
       invoiceDate: 'Hoy'
@@ -2302,6 +2257,27 @@ document.querySelector('#btnApplyChangeRoute')?.addEventListener('click', () => 
   showToast('Ruta recalculada y enviada al GPS de la unidad.');
 });
 
+// Map Zoom & Center Controls
+let mapZoom = 1;
+document.querySelector('#btnMapZoomIn')?.addEventListener('click', () => {
+  mapZoom = Math.min(1.8, mapZoom + 0.2);
+  const grid = document.querySelector('#mapGridEl');
+  if (grid) grid.style.transform = `scale(${mapZoom})`;
+  showToast(`Mapa: Zoom ${Math.round(mapZoom * 100)}%`);
+});
+document.querySelector('#btnMapZoomOut')?.addEventListener('click', () => {
+  mapZoom = Math.max(0.8, mapZoom - 0.2);
+  const grid = document.querySelector('#mapGridEl');
+  if (grid) grid.style.transform = `scale(${mapZoom})`;
+  showToast(`Mapa: Zoom ${Math.round(mapZoom * 100)}%`);
+});
+document.querySelector('#btnMapCenter')?.addEventListener('click', () => {
+  mapZoom = 1;
+  const grid = document.querySelector('#mapGridEl');
+  if (grid) grid.style.transform = 'scale(1)';
+  showToast('Mapa: Centrado en coordenadas GPS del tractocamión');
+});
+
 // Search input
 document.querySelector('#searchInput')?.addEventListener('input', (e) => {
   const q = e.target.value.toLowerCase().trim();
@@ -2343,7 +2319,7 @@ document.querySelector('#btnQuickNotifs')?.addEventListener('click', () => showT
 document.querySelector('#btnQuickSettings')?.addEventListener('click', () => showToast('Ajustes de sistema y telemetría PAVA Track'));
 document.querySelector('#btnQuickHelp')?.addEventListener('click', () => showToast('Mesa de control 24/7: 800-7282-872 · Soporte SAT/SCT'));
 document.querySelector('#btnQuickMore')?.addEventListener('click', () => showToast('Herramientas de auditoría y sincronización de cartas porte'));
-document.querySelector('#userMenuTrigger')?.addEventListener('click', () => showToast('Sesión activa: Alex Morales (Jefe de Tráfico México)'));
+document.querySelector('#userMenuTrigger')?.addEventListener('click', () => showToast('Sesión activa: Javier Gonzalez (Jefe de Tráfico México)'));
 document.querySelector('#topNotifBtn')?.addEventListener('click', () => showToast('Notificaciones: 3 alertas de ruta pendientes'));
 document.querySelector('#btnAdvancedFilters')?.addEventListener('click', () => showToast('Filtros avanzados por corredor y tipo de unidad'));
 document.querySelector('#btnRequestsMore')?.addEventListener('click', () => showToast('Opciones de solicitud de despacho'));
@@ -2374,24 +2350,13 @@ document.querySelector('#btnNewOperator')?.addEventListener('click', () => {
   showToast('Abriendo alta de operador y verificación de licencia SCT...');
 });
 
-// Window resize handler for Leaflet
-window.addEventListener('resize', () => {
-  if (liveLeafletMap) {
-    liveLeafletMap.invalidateSize();
-  }
-});
-
 // -------------------------------------------------------------
 // INICIALIZACIÓN GLOBAL
 // -------------------------------------------------------------
 renderFleetGrid('all');
+initRealMap();
+selectVehicle('MX-752069247', false);
+switchView('tracking');
 renderTables();
 renderSociosView();
-
-// Inicializar mapa interactivo real de Google Maps México
-setTimeout(() => {
-  initRealMap();
-  selectVehicle('MX-752069247', false);
-}, 80);
-
-console.log('PAVA Track - Inicializado con éxito y mapa satelital de México activo');
+console.log('PAVA Track - Inicializado con éxito');
