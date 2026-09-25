@@ -1,0 +1,847 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0d0f13" />
+  <title>PAVA Track | Control Logístico México</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <!-- LEAFLET REAL MAPS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <!-- SIDEBAR NAVIGATION -->
+    <aside class="sidebar" aria-label="Primary navigation">
+      <div class="brand">
+        <span class="brand-mark"><span></span></span>
+        <div><strong>PAVA Track</strong><small>Flota México</small></div>
+      </div>
+      <nav class="main-nav">
+        <p class="nav-label">Workspace</p>
+        <button class="nav-item" data-view="dashboard"><span class="icon"><svg viewBox="0 0 24 24" class="svg-icon"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>Dashboard</button>
+        <button class="nav-item" data-view="chats"><span class="icon"><svg viewBox="0 0 24 24" class="svg-icon"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>Chats <b class="nav-badge">2</b></button>
+        <button class="nav-item" data-view="socios"><span class="icon"><svg viewBox="0 0 24 24" class="svg-icon"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>Socios</button>
+        <button class="nav-item active" data-view="tracking"><span class="icon"><svg viewBox="0 0 24 24" class="svg-icon"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span>Rastreo</button>
+        
+        <div class="nav-group open">
+          <button class="nav-item nav-group-btn"><span class="icon"><svg viewBox="0 0 24 24" class="svg-icon"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><line x1="8" y1="11" x2="16" y2="11"/><line x1="8" y1="16" x2="13" y2="16"/></svg></span>Solicitudes <span class="chevron"><svg viewBox="0 0 24 24" class="svg-icon" style="width:12px;height:12px;"><polyline points="6 9 12 15 18 9"/></svg></span></button>
+          <div class="sub-nav">
+            <button class="sub-item" data-view="camiones">Camiones</button>
+            <button class="sub-item" data-view="carga">Carga</button>
+            <button class="sub-item" data-view="reportes">Reportes <b>3</b></button>
+            <button class="sub-item" data-view="operadores">Operadores</button>
+          </div>
+        </div>
+        
+        <button class="nav-item" data-view="analitica"><span class="icon"><svg viewBox="0 0 24 24" class="svg-icon"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg></span>Analítica</button>
+        <button class="nav-item" data-view="historial"><span class="icon"><svg viewBox="0 0 24 24" class="svg-icon"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><polyline points="12 7 12 12 15 15"/></svg></span>Historial</button>
+      </nav>
+      
+      <div class="sidebar-bottom">
+        <div class="mini-actions">
+          <button aria-label="Notificaciones" id="btnQuickNotifs" title="Notificaciones"><svg viewBox="0 0 24 24" class="svg-icon"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></button>
+          <button aria-label="Configuración" id="btnQuickSettings" title="Configuración"><svg viewBox="0 0 24 24" class="svg-icon"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
+          <button aria-label="Ayuda" id="btnQuickHelp" title="Ayuda de mesa de control"><svg viewBox="0 0 24 24" class="svg-icon"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></button>
+          <button aria-label="Más opciones" id="btnQuickMore" title="Más herramientas"><svg viewBox="0 0 24 24" class="svg-icon"><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/><circle cx="5" cy="12" r="1.5"/></svg></button>
+        </div>
+        <button class="new-request" id="btnOpenNewRequest">
+          <span><svg viewBox="0 0 24 24" class="svg-icon" style="width:14px;height:14px;stroke-width:2.5;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          <div><strong>Nueva Solicitud</strong><small>Iniciar despacho en ruta</small></div>
+        </button>
+        <div class="user">
+          <div class="avatar">AM</div>
+          <div><strong>Alex Morales</strong><small>Jefe de tráfico México</small></div>
+          <span class="dots" id="userMenuTrigger"><svg viewBox="0 0 24 24" class="svg-icon" style="width:14px;height:14px;"><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/><circle cx="5" cy="12" r="1.5"/></svg></span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN WORKSPACE VIEWS -->
+    <main class="workspace">
+      <!-- TOPBAR -->
+      <header class="topbar">
+        <div>
+          <p class="eyebrow" id="topbarEyebrow">Operaciones / Flota en vivo</p>
+          <h1 id="topbarTitle">Rastreo <span class="live-dot"></span></h1>
+        </div>
+        <div class="top-actions">
+          <label class="search">
+            <span><svg viewBox="0 0 24 24" class="svg-icon"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+            <input id="searchInput" placeholder="Buscar envío, ruta, chofer o unidad..." aria-label="Buscar envío, ruta o unidad" />
+          </label>
+          <button class="icon-btn" id="topNotifBtn" aria-label="Notificaciones de tráfico"><svg viewBox="0 0 24 24" class="svg-icon"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><i></i></button>
+          <button class="icon-btn theme-toggle" aria-label="Cambiar tema oscuro/claro"><svg viewBox="0 0 24 24" class="svg-icon theme-sun" id="topThemeIcon"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button>
+          <div class="top-avatar" title="Alex Morales · Tráfico PAVA">AM</div>
+        </div>
+      </header>
+
+      <!-- VIEW 1: RASTREO (MAIN FLEET TRACKING) -->
+      <div class="view-content active" id="view-tracking">
+        <section class="stats-row" aria-label="Fleet summary">
+          <div class="stat"><span class="stat-icon blue"><svg viewBox="0 0 24 24" class="svg-icon"><rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></span><div><small>Unidades activas</small><strong id="statActiveCount">38 <em>+12%</em></strong></div></div>
+          <div class="stat"><span class="stat-icon green"><svg viewBox="0 0 24 24" class="svg-icon"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span><div><small>A tiempo</small><strong>94.2% <em>+4.8%</em></strong></div></div>
+          <div class="stat"><span class="stat-icon amber"><svg viewBox="0 0 24 24" class="svg-icon"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span><div><small>Tiempo prom. entrega</small><strong>10h 42m <em class="muted">-18m</em></strong></div></div>
+          <div class="stat date-stat"><span class="stat-icon violet"><svg viewBox="0 0 24 24" class="svg-icon"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span><div><small>Hoy, 08 Sep 2024</small><strong>Martes <span class="arrow">→</span></strong></div></div>
+        </section>
+
+        <section class="tracking-section">
+          <div class="section-heading">
+            <div><p class="eyebrow">Monitoreo de telemetría</p><h2>Todas las unidades <span id="vehicleCount">08</span></h2></div>
+            <div class="view-actions">
+              <div class="segmented" id="fleetFilterSegment">
+                <button class="selected" data-filter="all">Todas <span>08</span></button>
+                <button data-filter="active">En ruta <span>06</span></button>
+                <button data-filter="stopped">Detenidas <span>02</span></button>
+              </div>
+              <button class="filter-btn" id="btnAdvancedFilters"><svg viewBox="0 0 24 24" class="svg-icon" style="width:13px;height:13px;"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg> <span>Filtros</span></button>
+            </div>
+          </div>
+          <div class="vehicle-grid" id="vehicleGrid">
+            <!-- Rendered by JavaScript dynamically -->
+          </div>
+        </section>
+      </div>
+
+      <!-- VIEW 2: DASHBOARD OVERVIEW -->
+      <div class="view-content" id="view-dashboard">
+        <section class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-card-header">
+              <span class="kpi-icon blue"><svg viewBox="0 0 24 24" class="svg-icon"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></span>
+              <span class="kpi-badge green">↑ +18.4%</span>
+            </div>
+            <span class="kpi-title">Carga Transportada Hoy</span>
+            <strong class="kpi-num">428.6 <span>Ton</span></strong>
+            <span class="kpi-sub">Total acumulado en 38 fletes</span>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-card-header">
+              <span class="kpi-icon green"><svg viewBox="0 0 24 24" class="svg-icon"><path d="M3 22h12M4 4h10a2 2 0 0 1 2 2v16H4V6a2 2 0 0 1 0-2zm12 5h2a2 2 0 0 1 2 2v6a1.5 1.5 0 0 0 3 0V8l-3-3"/><line x1="7" y1="8" x2="11" y2="8"/><rect x="6" y="11" width="6" height="4" rx="1"/></svg></span>
+              <span class="kpi-badge green">↓ -2.1 L</span>
+            </div>
+            <span class="kpi-title">Rendimiento de Diésel</span>
+            <strong class="kpi-num">32.4 <span>L/100km</span></strong>
+            <span class="kpi-sub">Eficiencia promedio nacional</span>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-card-header">
+              <span class="kpi-icon amber"><svg viewBox="0 0 24 24" class="svg-icon"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+              <span class="kpi-badge amber">Atención</span>
+            </div>
+            <span class="kpi-title">Alertas de Seguridad SCT</span>
+            <strong class="kpi-num">03 <span>Activas</span></strong>
+            <span class="kpi-sub">1 exceso vel. · 2 paradas en ruta</span>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-card-header">
+              <span class="kpi-icon violet"><svg viewBox="0 0 24 24" class="svg-icon"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></span>
+              <span class="kpi-badge blue">Óptimo</span>
+            </div>
+            <span class="kpi-title">Cumplimiento NOM-087</span>
+            <strong class="kpi-num">98.5%</strong>
+            <span class="kpi-sub">Horas de descanso choferes</span>
+          </div>
+        </section>
+
+        <!-- DASHBOARD LIVE STATUS STRIP -->
+        <section class="dash-quick-strip">
+          <div class="quick-pill"><span class="dot green"></span><strong>8/8</strong> Unidades 3.5T con telemetría activa</div>
+          <div class="quick-pill"><span class="dot blue"></span><strong>100%</strong> Cartas Porte SAT CFDI 4.0</div>
+          <div class="quick-pill"><span class="dot cyan"></span><strong>3 Casetas</strong> CAPUFE cruzadas</div>
+          <div class="quick-pill"><span class="dot amber"></span><strong>1 Custodia</strong> armada en Pacífico</div>
+        </section>
+
+        <section class="dashboard-layout">
+          <!-- CARD 1: CORREDORES NACIONALES -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <p class="eyebrow">Red Carretera Nacional</p>
+                <h3>Distribución de Flota por Corredor</h3>
+              </div>
+              <span class="pill-tag">México</span>
+            </div>
+            <div class="corridors-list">
+              <div class="corridor-row">
+                <div class="c-header">
+                  <div class="c-info">
+                    <span class="corridor-badge blue">MEX-57</span>
+                    <strong>México 57 (CDMX · QRO · MTY · Laredo)</strong>
+                  </div>
+                  <div class="c-stats">
+                    <span class="c-units">18 Unidades</span>
+                    <strong class="c-pct">75%</strong>
+                  </div>
+                </div>
+                <div class="progress-bar"><div class="p-fill" style="width:75%; background: linear-gradient(90deg, #2563eb, #38bdf8);"></div></div>
+              </div>
+
+              <div class="corridor-row">
+                <div class="c-header">
+                  <div class="c-info">
+                    <span class="corridor-badge green">PACÍFICO</span>
+                    <strong>Corredor Pacífico (Manzanillo · GDL · Bajío)</strong>
+                  </div>
+                  <div class="c-stats">
+                    <span class="c-units">8 Unidades</span>
+                    <strong class="c-pct">45%</strong>
+                  </div>
+                </div>
+                <div class="progress-bar"><div class="p-fill" style="width:45%; background: linear-gradient(90deg, #059669, #34d399);"></div></div>
+              </div>
+
+              <div class="corridor-row">
+                <div class="c-header">
+                  <div class="c-info">
+                    <span class="corridor-badge amber">GOLFO</span>
+                    <strong>Corredor Golfo (Veracruz · Puebla · CDMX)</strong>
+                  </div>
+                  <div class="c-stats">
+                    <span class="c-units">5 Unidades</span>
+                    <strong class="c-pct">30%</strong>
+                  </div>
+                </div>
+                <div class="progress-bar"><div class="p-fill" style="width:30%; background: linear-gradient(90deg, #d97706, #fbbf24);"></div></div>
+              </div>
+
+              <div class="corridor-row">
+                <div class="c-header">
+                  <div class="c-info">
+                    <span class="corridor-badge violet">NOROESTE</span>
+                    <strong>Corredor Noroeste (Tijuana · Mexicali)</strong>
+                  </div>
+                  <div class="c-stats">
+                    <span class="c-units">4 Unidades</span>
+                    <strong class="c-pct">25%</strong>
+                  </div>
+                </div>
+                <div class="progress-bar"><div class="p-fill" style="width:25%; background: linear-gradient(90deg, #7c3aed, #a78bfa);"></div></div>
+              </div>
+
+              <div class="corridor-row">
+                <div class="c-header">
+                  <div class="c-info">
+                    <span class="corridor-badge red">SURESTE</span>
+                    <strong>Península Sureste (Mérida · Cancún)</strong>
+                  </div>
+                  <div class="c-stats">
+                    <span class="c-units">3 Unidades</span>
+                    <strong class="c-pct">18%</strong>
+                  </div>
+                </div>
+                <div class="progress-bar"><div class="p-fill" style="width:18%; background: linear-gradient(90deg, #dc2626, #f87171);"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 2: ALERTAS DE TELEMETRÍA -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <p class="eyebrow">Seguridad y Monitoreo 24/7</p>
+                <h3>Alertas de Telemetría en Tiempo Real</h3>
+              </div>
+              <button class="btn-sm" id="btnClearAlerts">Marcar leídas</button>
+            </div>
+            <div class="alerts-list">
+              <div class="alert-item warn">
+                <div class="alert-icon-box warn"><svg viewBox="0 0 24 24" class="svg-icon"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+                <div class="alert-body">
+                  <div class="alert-top">
+                    <strong>Unidad MX-916472621 <small>(RAM 4000 HD 4T)</small></strong>
+                    <span class="alert-time">Hace 8m</span>
+                  </div>
+                  <p class="alert-desc">Retraso por derrumbe parcial en Cumbres de Maltrata (Veracruz → Puebla) · +45m</p>
+                  <div class="alert-actions">
+                    <button class="alert-action-btn" onclick="selectVehicle('MX-916472621'); switchView('tracking');">Ver en Mapa</button>
+                    <button class="alert-action-btn" onclick="switchView('chats'); switchChatThread('MX-916472621');">Chat Cabina</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="alert-item speed">
+                <div class="alert-icon-box speed"><svg viewBox="0 0 24 24" class="svg-icon"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+                <div class="alert-body">
+                  <div class="alert-top">
+                    <strong>Unidad MX-752263347 <small>(Ford F-450 Super Duty)</small></strong>
+                    <span class="alert-time">Hace 24m</span>
+                  </div>
+                  <p class="alert-desc">Velocidad 96 km/h en autopista Monterrey-Laredo (Límite SCT 90 km/h)</p>
+                  <div class="alert-actions">
+                    <button class="alert-action-btn" onclick="selectVehicle('MX-752263347'); switchView('tracking');">Ver en Mapa</button>
+                    <button class="alert-action-btn" onclick="switchView('chats'); switchChatThread('MX-752263347');">Chat Cabina</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="alert-item info">
+                <div class="alert-icon-box info"><svg viewBox="0 0 24 24" class="svg-icon"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+                <div class="alert-body">
+                  <div class="alert-top">
+                    <strong>Unidad MX-118134203 <small>(Ford F-350 Super Duty)</small></strong>
+                    <span class="alert-time">Hace 36m</span>
+                  </div>
+                  <p class="alert-desc">Cruce de caseta La Rumorosa confirmado vía Telepeaje IAVE sin incidencias</p>
+                  <div class="alert-actions">
+                    <button class="alert-action-btn" onclick="selectVehicle('MX-118134203'); switchView('tracking');">Ver en Mapa</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- VIEW 3: CHATS INTERACTIVOS -->
+      <div class="view-content" id="view-chats">
+        <div class="chat-app">
+          <div class="chat-sidebar">
+            <div class="chat-search-wrap">
+              <div class="chat-search-bar">
+                <span><svg viewBox="0 0 24 24" class="svg-icon"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+                <input id="chatFilterInput" placeholder="Buscar operador, unidad o ruta..." />
+              </div>
+            </div>
+            <div class="chat-filter-tabs" id="chatFilterTabs">
+              <button class="chat-filter-pill active" data-filter="all">Todos</button>
+              <button class="chat-filter-pill" data-filter="route">En ruta (6)</button>
+              <button class="chat-filter-pill" data-filter="alert">Alertas (2)</button>
+            </div>
+            <div class="chat-threads-list" id="chatThreadsList">
+              <!-- Threads rendered by JS -->
+            </div>
+          </div>
+          <div class="chat-main" id="chatMainPanel">
+            <!-- Chat active thread rendered by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW 4: SOCIOS COMERCIALES -->
+      <div class="view-content" id="view-socios">
+        <div class="view-header-bar">
+          <div><p class="eyebrow">Directorio</p><h2>Socios Comerciales y Clientes</h2></div>
+          <button class="btn-primary" id="btnNewPartner">+ Registrar nuevo socio</button>
+        </div>
+        <div class="partners-grid" id="partnersGrid">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+
+      <!-- VIEW 5: SOLICITUDES / CAMIONES -->
+      <div class="view-content" id="view-camiones">
+        <div class="view-header-bar">
+          <div><p class="eyebrow">Parque vehicular</p><h2>Inventario de Camionetas F-350 y Unidades 3.5T - 4.5T</h2></div>
+          <button class="btn-primary" id="btnNewTruckAsset">+ Alta de unidad</button>
+        </div>
+        <div class="table-container" id="trucksTableContainer"></div>
+      </div>
+
+      <!-- VIEW 6: SOLICITUDES / CARGA -->
+      <div class="view-content" id="view-carga">
+        <div class="view-header-bar">
+          <div><p class="eyebrow">Manifiestos</p><h2>Control de Cargas, Cubicaje y Sellos Fiscales</h2></div>
+          <button class="btn-primary" id="btnNewCargoManifest">+ Registrar carga</button>
+        </div>
+        <div class="table-container" id="cargoTableContainer"></div>
+      </div>
+
+      <!-- VIEW 7: SOLICITUDES / REPORTES -->
+      <div class="view-content" id="view-reportes">
+        <div class="view-header-bar">
+          <div><p class="eyebrow">Bitácora de tráfico</p><h2>Reportes de Incidencias en Carretera</h2></div>
+          <button class="btn-primary" id="btnGenerateReport">+ Generar reporte PDF</button>
+        </div>
+        <div class="table-container" id="reportsTableContainer"></div>
+      </div>
+
+      <!-- VIEW 8: SOLICITUDES / OPERADORES -->
+      <div class="view-content" id="view-operadores">
+        <div class="view-header-bar">
+          <div><p class="eyebrow">Recursos humanos</p><h2>Padrón de Operadores con Licencia Federal SCT</h2></div>
+          <button class="btn-primary" id="btnNewOperator">+ Registrar operador</button>
+        </div>
+        <div class="table-container" id="operatorsTableContainer"></div>
+      </div>
+
+      <!-- VIEW 9: ANALÍTICA -->
+      <div class="view-content" id="view-analitica">
+        <div class="view-header-bar">
+          <div>
+            <p class="eyebrow">Rendimiento y Telemetría IoT</p>
+            <h2>Analítica de Eficiencia y Rendimiento</h2>
+          </div>
+          <div class="analytics-filter-bar">
+            <button class="analytics-time-btn active">Septiembre 2024 <svg viewBox="0 0 24 24" class="svg-icon" style="width:11px;height:11px;display:inline-block;vertical-align:-1px;margin-left:4px;"><polyline points="6 9 12 15 18 9"/></svg></button>
+            <button class="analytics-time-btn" onclick="showToast('Filtrando últimos 7 días...')">7 Días</button>
+            <button class="btn-sm" onclick="showToast('Exportando reporte analítico en PDF...')">Exportar PDF</button>
+          </div>
+        </div>
+
+        <!-- TOP ANALYTICS KPIS -->
+        <section class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-card-header">
+              <span class="kpi-icon blue"><svg viewBox="0 0 24 24" class="svg-icon"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
+              <span class="kpi-badge green">+2.8 km/h</span>
+            </div>
+            <span class="kpi-title">Velocidad Crucero</span>
+            <strong class="kpi-num">76.4 <span>km/h</span></strong>
+            <span class="kpi-sub">En autopistas de cuota federales</span>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-card-header">
+              <span class="kpi-icon green"><svg viewBox="0 0 24 24" class="svg-icon"><path d="M3 22h12M4 4h10a2 2 0 0 1 2 2v16H4V6a2 2 0 0 1 0-2zm12 5h2a2 2 0 0 1 2 2v6a1.5 1.5 0 0 0 3 0V8l-3-3"/><line x1="7" y1="8" x2="11" y2="8"/><rect x="6" y="11" width="6" height="4" rx="1"/></svg></span>
+              <span class="kpi-badge green">A+ Eficiente</span>
+            </div>
+            <span class="kpi-title">Consumo Prom. Diésel</span>
+            <strong class="kpi-num">31.2 <span>L/100km</span></strong>
+            <span class="kpi-sub">Mejora de -6.2% vs mes anterior</span>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-card-header">
+              <span class="kpi-icon amber"><svg viewBox="0 0 24 24" class="svg-icon"><line x1="10" y1="2" x2="14" y2="2"/><line x1="12" y1="14" x2="15" y2="11"/><circle cx="12" cy="14" r="8"/></svg></span>
+              <span class="kpi-badge green">↓ -4.5 min</span>
+            </div>
+            <span class="kpi-title">Tiempo en Casetas</span>
+            <strong class="kpi-num">14.2 <span>min</span></strong>
+            <span class="kpi-sub">Tiempo promedio cruce CAPUFE</span>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-card-header">
+              <span class="kpi-icon violet"><svg viewBox="0 0 24 24" class="svg-icon"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/><line x1="5" y1="15" x2="9" y2="15"/></svg></span>
+              <span class="kpi-badge blue">98.1% Éxito</span>
+            </div>
+            <span class="kpi-title">Efectividad Tag IAVE</span>
+            <strong class="kpi-num">98.1%</strong>
+            <span class="kpi-sub">Telepeaje digital sin efectivo</span>
+          </div>
+        </section>
+
+        <!-- MAIN ANALYTICS CARDS -->
+        <div class="analytics-grid">
+          <!-- CARD 1: CONSUMO DIÉSEL VERTICAL BAR CHART -->
+          <div class="analytics-card">
+            <div class="dash-card-header">
+              <div>
+                <p class="eyebrow">Métrica de Combustible</p>
+                <h3>Consumo de Diésel por Corredor (L/100 km)</h3>
+              </div>
+              <span class="pill-tag">Telemetría IoT</span>
+            </div>
+            
+            <div class="bar-chart-container">
+              <div class="chart-y-axis">
+                <span>40L</span>
+                <span>30L</span>
+                <span>20L</span>
+                <span>10L</span>
+                <span>0L</span>
+              </div>
+              <div class="bar-chart-bars">
+                <div class="chart-col" title="México 57: 34 L/100km · $7.80/km">
+                  <div class="chart-bar-track">
+                    <div class="chart-bar-fill blue" style="height: 85%;">
+                      <span class="chart-val">34L</span>
+                    </div>
+                  </div>
+                  <span class="chart-label">México 57</span>
+                </div>
+
+                <div class="chart-col" title="Pacífico: 29 L/100km · $6.65/km">
+                  <div class="chart-bar-track">
+                    <div class="chart-bar-fill green" style="height: 72%;">
+                      <span class="chart-val">29L</span>
+                    </div>
+                  </div>
+                  <span class="chart-label">Pacífico</span>
+                </div>
+
+                <div class="chart-col" title="Golfo (Maltrata): 38 L/100km · $8.75/km">
+                  <div class="chart-bar-track">
+                    <div class="chart-bar-fill amber" style="height: 95%;">
+                      <span class="chart-val">38L</span>
+                    </div>
+                  </div>
+                  <span class="chart-label">Golfo</span>
+                </div>
+
+                <div class="chart-col" title="Bajío: 31 L/100km · $7.15/km">
+                  <div class="chart-bar-track">
+                    <div class="chart-bar-fill cyan" style="height: 77%;">
+                      <span class="chart-val">31L</span>
+                    </div>
+                  </div>
+                  <span class="chart-label">Bajío</span>
+                </div>
+
+                <div class="chart-col" title="Sureste: 27 L/100km · $6.20/km">
+                  <div class="chart-bar-track">
+                    <div class="chart-bar-fill violet" style="height: 67%;">
+                      <span class="chart-val">27L</span>
+                    </div>
+                  </div>
+                  <span class="chart-label">Sureste</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="chart-footer-note">
+              <span>• Promedio nacional de flota: <strong>31.8 L/100 km</strong></span>
+              <span style="color:#10b981;"><svg viewBox="0 0 24 24" class="svg-icon" style="width:13px;height:13px;display:inline-block;vertical-align:-2px;stroke:#10b981;"><polyline points="20 6 9 17 4 12"/></svg> Cumple con meta NOM-068 SCT (&lt; 33L)</span>
+            </div>
+          </div>
+
+          <!-- CARD 2: CASETAS Y TELEPEAJE CAPUFE -->
+          <div class="analytics-card">
+            <div class="dash-card-header">
+              <div>
+                <p class="eyebrow">Infraestructura y Peajes</p>
+                <h3>Tiempos de Cruce por Caseta CAPUFE</h3>
+              </div>
+              <span class="pill-tag">IAVE / Viapass</span>
+            </div>
+
+            <div class="toll-plazas-list">
+              <div class="toll-row">
+                <div class="toll-info">
+                  <span class="toll-badge green">IAVE 99%</span>
+                  <div>
+                    <strong>Caseta Palmillas (Autopista 57D)</strong>
+                    <small>KM 148 · México - Querétaro</small>
+                  </div>
+                </div>
+                <div class="toll-meta">
+                  <strong style="color:#10b981;">11 min</strong>
+                  <span class="toll-status-tag green">Fluido</span>
+                </div>
+              </div>
+
+              <div class="toll-row">
+                <div class="toll-info">
+                  <span class="toll-badge amber">IAVE 96%</span>
+                  <div>
+                    <strong>Caseta Tepotzotlán (CEM)</strong>
+                    <small>KM 43 · Salida CDMX Norte</small>
+                  </div>
+                </div>
+                <div class="toll-meta">
+                  <strong style="color:#f59e0b;">18 min</strong>
+                  <span class="toll-status-tag amber">Moderado</span>
+                </div>
+              </div>
+
+              <div class="toll-row">
+                <div class="toll-info">
+                  <span class="toll-badge green">IAVE 98%</span>
+                  <div>
+                    <strong>Caseta San Marcos (Autopista Puebla)</strong>
+                    <small>KM 33 · México - Puebla</small>
+                  </div>
+                </div>
+                <div class="toll-meta">
+                  <strong style="color:#38bdf8;">15 min</strong>
+                  <span class="toll-status-tag blue">Normal</span>
+                </div>
+              </div>
+
+              <div class="toll-row">
+                <div class="toll-info">
+                  <span class="toll-badge green">IAVE 100%</span>
+                  <div>
+                    <strong>Caseta El Hongo (La Rumorosa)</strong>
+                    <small>KM 92 · Tijuana - Mexicali</small>
+                  </div>
+                </div>
+                <div class="toll-meta">
+                  <strong style="color:#10b981;">12 min</strong>
+                  <span class="toll-status-tag green">Despejado</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="chart-footer-note">
+              <span>• Gasto promedio de peaje por viaje: <strong>$1,420 MXN</strong></span>
+              <span style="color:#38bdf8;"><svg viewBox="0 0 24 24" class="svg-icon" style="width:13px;height:13px;display:inline-block;vertical-align:-2px;stroke:#38bdf8;"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Facturación automática CFDI SAT</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW 10: HISTORIAL -->
+      <div class="view-content" id="view-historial">
+        <div class="view-header-bar">
+          <div><p class="eyebrow">Auditoría</p><h2>Historial de Viajes Completados</h2></div>
+          <button class="btn-sm" id="btnExportHistory">Exportar Excel / CSV</button>
+        </div>
+        <div class="table-container" id="historyTableContainer"></div>
+      </div>
+    </main>
+
+    <!-- DETAILS PANEL (RIGHT SIDEBAR) -->
+    <aside class="details-panel" aria-label="Shipment details">
+      <div class="detail-header">
+        <div>
+          <p class="eyebrow">Detalles del envío</p>
+          <h2 id="detailId">MX-752069247 <span class="status onroute"><i></i>En ruta</span></h2>
+        </div>
+        <div class="detail-actions">
+          <button class="call-btn" id="btnCallDriver" title="Llamar por radio/celular al operador"><svg viewBox="0 0 24 24" class="svg-icon"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> <span>Llamar operador</span></button>
+          <button class="chat-btn" id="btnChatDriver" title="Abrir chat directo con cabina"><svg viewBox="0 0 24 24" class="svg-icon"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> <span>Chat con cabina</span></button>
+        </div>
+      </div>
+
+      <!-- DETAIL TABS -->
+      <div class="detail-tabs" id="detailTabsNav">
+        <button class="active" data-tab="shipping">Información de envío</button>
+        <button data-tab="vehicle">Datos de unidad</button>
+        <button data-tab="documents">Documentos</button>
+        <button data-tab="company">Empresa</button>
+        <button data-tab="billing">Facturación</button>
+      </div>
+
+      <!-- DETAIL TAB CONTENTS -->
+      <div class="detail-content">
+        <!-- TAB 1: INFORMACIÓN DE ENVÍO -->
+        <div class="tab-pane active" id="tab-shipping">
+          <section class="capacity">
+            <div class="section-line"><h3>Capacidad actual de carga</h3><span id="capacityStatusText">59% ocupado</span></div>
+            <div class="capacity-illustration" id="detailCapacityIllustration"></div>
+          </section>
+          
+          <section class="route-section">
+            <div class="section-line">
+              <h3>Ruta en curso</h3>
+              <span class="route-time"><span id="routeRemainingTime">01:25:35</span> <small id="routeRemainingKm">28 km restantes</small> <button id="btnChangeRoute"><svg viewBox="0 0 24 24" class="svg-icon" style="width:11px;height:11px;display:inline-block;vertical-align:-1px;"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg> Cambiar ruta</button></span>
+            </div>
+            
+            <div class="real-map-wrapper">
+              <!-- REAL LEAFLET / GOOGLE MAPS CONTAINER -->
+              <div id="realLiveMap" class="real-live-map"></div>
+
+              <!-- MAP TOP HUD: HIGHWAY & COORDINATES -->
+              <div class="map-hud-overlay">
+                <div class="map-hud-pill">
+                  <span class="hud-live-dot"></span>
+                  <span id="mapGpsHighway">Autopista 57D México-Querétaro · KM 148</span>
+                </div>
+                <div class="map-hud-coords" id="mapGpsCoords">20.3712° N, -99.9921° W</div>
+              </div>
+
+              <!-- MAP BOTTOM ACTION BAR (GOOGLE MAPS LINK & LAYER TOGGLE) -->
+              <div class="map-bottom-bar">
+                <a id="btnOpenGoogleMaps" href="https://www.google.com/maps" target="_blank" rel="noopener noreferrer" class="btn-gmaps" title="Abrir ruta satelital completa en Google Maps">
+                  <svg viewBox="0 0 24 24" class="svg-icon" style="width:12px;height:12px;display:inline-block;vertical-align:-2px;margin-right:4px;"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+                  <span>Google Maps</span>
+                </a>
+                <div class="map-layer-selector">
+                  <button class="layer-btn active" data-layer="google_roads" title="Google Maps Calles">Calles</button>
+                  <button class="layer-btn" data-layer="google_sat" title="Google Maps Satélite e Híbrido">Satélite</button>
+                  <button class="layer-btn" data-layer="carto_dark" title="Modo Nocturno PAVA">Noche</button>
+                </div>
+              </div>
+
+              <!-- MAP FLOATING ZOOM & CENTER CONTROLS -->
+              <div class="map-controls">
+                <button id="btnMapZoomIn" title="Acercar mapa"><svg viewBox="0 0 24 24" class="svg-icon"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+                <button id="btnMapZoomOut" title="Alejar mapa"><svg viewBox="0 0 24 24" class="svg-icon"><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+                <button id="btnMapCenter" title="Centrar en posición GPS en vivo de la unidad"><svg viewBox="0 0 24 24" class="svg-icon"><circle cx="12" cy="12" r="10"/><line x1="22" y1="12" x2="18" y2="12"/><line x1="6" y1="12" x2="2" y2="12"/><line x1="12" y1="6" x2="12" y2="2"/><line x1="12" y1="22" x2="12" y2="18"/></svg></button>
+              </div>
+            </div>
+          </section>
+          
+          <section class="photo-section">
+            <div class="section-line"><h3>Evidencia fotográfica de carga</h3><button class="link-btn" id="btnViewAllPhotos">Ver todas <span>→</span></button></div>
+            <div class="photos" id="cargoPhotoGallery">
+              <div class="photo photo-one" data-index="0" title="Ver foto de estiba delantera"><span>+4</span></div>
+              <div class="photo photo-two" data-index="1" title="Ver foto de amarres"></div>
+              <div class="photo photo-three" data-index="2" title="Ver foto de bahía central"></div>
+              <div class="photo photo-four" data-index="3" title="Ver foto de sellos traseros"></div>
+              <button class="add-photo" id="btnRequestPhoto"><svg viewBox="0 0 24 24" class="svg-icon" style="width:18px;height:18px;"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg><small>Solicitar foto</small></button>
+            </div>
+            <div class="photo-caption"><span>Estiba del. izq.</span><span>Amarre bandas</span><span>Bahía central</span><span>Sellos traseros</span></div>
+          </section>
+          
+          <section class="requests">
+            <div class="section-line"><h3>Solicitudes de despacho</h3><button class="more-btn" id="btnRequestsMore"><svg viewBox="0 0 24 24" class="svg-icon" style="width:14px;height:14px;"><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/><circle cx="5" cy="12" r="1.5"/></svg></button></div>
+            <div class="request-row" id="activeRequestRow">
+              <span class="request-icon"><svg viewBox="0 0 24 24" class="svg-icon"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+              <div><strong id="requestTitle">Actualizar contacto de entrega</strong><small id="requestMeta">Solicitado por tráfico · hace 12 min</small></div>
+              <button id="btnReviewRequest">Revisar</button>
+            </div>
+          </section>
+        </div>
+
+        <!-- TAB 2: DATOS DE UNIDAD -->
+        <div class="tab-pane" id="tab-vehicle">
+          <!-- Rendered dynamically by JS with unit telemetries -->
+        </div>
+
+        <!-- TAB 3: DOCUMENTOS -->
+        <div class="tab-pane" id="tab-documents">
+          <!-- Rendered dynamically by JS with official legal docs -->
+        </div>
+
+        <!-- TAB 4: EMPRESA -->
+        <div class="tab-pane" id="tab-company">
+          <!-- Rendered dynamically by JS with corporate transporter profile -->
+        </div>
+
+        <!-- TAB 5: FACTURACIÓN -->
+        <div class="tab-pane" id="tab-billing">
+          <!-- Rendered dynamically by JS with SAT CFDI breakdown -->
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- TOAST NOTIFICATIONS -->
+  <div class="toast" id="toast" role="status"></div>
+
+  <!-- MODAL: NUEVA SOLICITUD / DESPACHO -->
+  <div class="modal-overlay" id="modalNewRequest">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3>Nueva Solicitud de Embarque</h3>
+        <button class="modal-close" id="btnCloseNewRequest">&times;</button>
+      </div>
+      <form id="formNewRequest" class="modal-body">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="reqOrigin">Origen (Ciudad / Patio)</label>
+            <input id="reqOrigin" required placeholder="Ej. CDMX Vallejo, Manzanillo, etc." value="CDMX (Vallejo)" />
+          </div>
+          <div class="form-group">
+            <label for="reqDest">Destino (Ciudad / Patio)</label>
+            <input id="reqDest" required placeholder="Ej. Monterrey, Guadalajara, etc." value="Monterrey (Apodaca)" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="reqModel">Tipo de Unidad</label>
+            <select id="reqModel">
+              <option value="Ford F-350 Super Duty (Caja Seca 3.5T)" selected>Ford F-350 Super Duty (Caja Seca 3.5T)</option>
+              <option value="Ford F-450 Super Duty (Caja Seca 4.5T)">Ford F-450 Super Duty (Caja Seca 4.5T)</option>
+              <option value="RAM 4000 Heavy Duty (Caja Seca 4T)">RAM 4000 Heavy Duty (Caja Seca 4T)</option>
+              <option value="Chevrolet Silverado 3500 HD">Chevrolet Silverado 3500 HD (3.5T)</option>
+              <option value="Mercedes Sprinter 3.5T">Mercedes Sprinter 3.5T (Furgoneta)</option>
+              <option value="Isuzu ELF 300">Isuzu ELF 300 (Caja Seca 3.5T)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="reqCapacity">Capacidad de Carga (%)</label>
+            <input id="reqCapacity" type="number" min="10" max="100" value="75" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="reqDriver">Operador Asignado</label>
+            <input id="reqDriver" placeholder="Nombre del operador" value="Roberto Carlos Garza" required />
+          </div>
+          <div class="form-group">
+            <label for="reqCargo">Tipo de Carga</label>
+            <input id="reqCargo" placeholder="Ej. Abarrotes, Acero, Farmacéuticos" value="Mercancía General / Abarrotes" required />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" id="btnCancelNewRequest">Cancelar</button>
+          <button type="submit" class="btn-primary">Despachar Unidad</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: LLAMADA A CABINA -->
+  <div class="modal-overlay" id="modalCallDriver">
+    <div class="modal-dialog modal-sm call-dialog">
+      <div class="call-avatar"><svg viewBox="0 0 24 24" class="svg-icon" style="width:26px;height:26px;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+      <h3 id="callDriverName">Juan Carlos Méndez</h3>
+      <p id="callDriverUnit">Unidad MX-752069247 · En cabina</p>
+      <div class="call-timer" id="callTimerText">00:04</div>
+      <div class="call-actions-row">
+        <button class="call-action-btn" id="btnCallMute" title="Silenciar micro"><svg viewBox="0 0 24 24" class="svg-icon"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></button>
+        <button class="call-action-btn" id="btnCallSpeaker" title="Altavoz"><svg viewBox="0 0 24 24" class="svg-icon"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></button>
+        <button class="call-action-btn hangup" id="btnCallHangup" title="Colgar llamada"><svg viewBox="0 0 24 24" class="svg-icon"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: VISOR DE FOTOGRAFÍA DE CARGA -->
+  <div class="modal-overlay" id="modalPhotoViewer">
+    <div class="modal-dialog photo-dialog">
+      <div class="modal-header">
+        <h3 id="photoModalTitle">Evidencia Fotográfica de Carga</h3>
+        <button class="modal-close" id="btnClosePhotoViewer">&times;</button>
+      </div>
+      <div class="photo-viewer-body">
+        <div class="photo-display" id="photoViewerImg"></div>
+        <div class="photo-meta-sidebar">
+          <h4>Metadatos de Auditoría</h4>
+          <p><strong>Unidad:</strong> <span id="photoUnitMeta">MX-752069247</span></p>
+          <p><strong>Sello Fiscal SAT:</strong> <span id="photoSealMeta">SAT-MX-883921</span></p>
+          <p><strong>Fecha y Hora:</strong> <span id="photoTimestampMeta">08/Sep/2024 · 02:35:12 CST</span></p>
+          <p><strong>Ubicación GPS:</strong> <span id="photoGpsMeta">20.9142° N, 100.7412° W (Aut. 57D)</span></p>
+          <p><strong>Operador:</strong> <span id="photoDriverMeta">Juan Carlos Méndez</span></p>
+          <div class="photo-badge-status"><svg viewBox="0 0 24 24" class="svg-icon" style="width:13px;height:13px;margin-right:4px;"><polyline points="20 6 9 17 4 12"/></svg> Sello Intacto Verificado</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: CAMBIAR RUTA -->
+  <div class="modal-overlay" id="modalChangeRoute">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3>Optimizar o Cambiar Ruta de Tránsito</h3>
+        <button class="modal-close" id="btnCloseChangeRoute">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="muted-text">Seleccione la ruta alterna calculada por el sistema de telemetría vial de PAVA Track:</p>
+        <div class="route-options-list">
+          <label class="route-option-card selected">
+            <input type="radio" name="routeOpt" value="cuota" checked />
+            <div>
+              <strong>Autopista México 57D (Cuota - Recomendada)</strong>
+              <small>Tiempo estimado: 10h 45m · 890 km · Menor índice de incidencias</small>
+            </div>
+            <span class="route-tag green">Óptima</span>
+          </label>
+          <label class="route-option-card">
+            <input type="radio" name="routeOpt" value="libramiento" />
+            <div>
+              <strong>Vía Libramiento Noreste Querétaro - San Luis Potosí</strong>
+              <small>Tiempo estimado: 11h 10m · 915 km · Evita tráfico urbano</small>
+            </div>
+            <span class="route-tag blue">Fluida</span>
+          </label>
+          <label class="route-option-card">
+            <input type="radio" name="routeOpt" value="libre" />
+            <div>
+              <strong>Carretera Federal Libre 57 (Sin peaje)</strong>
+              <small>Tiempo estimado: 13h 20m · 870 km · Paradas frecuentes en poblados</small>
+            </div>
+            <span class="route-tag amber">Lenta</span>
+          </label>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" id="btnCancelChangeRoute">Conservar actual</button>
+          <button type="button" class="btn-primary" id="btnApplyChangeRoute">Aplicar nueva ruta a unidad</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
